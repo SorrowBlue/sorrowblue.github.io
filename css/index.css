@@ -1,17 +1,4 @@
-body{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-}
-#container{
-    flex-grow: 1;
-}
-footer{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
+
 .dark-primary-color    { background: #1976D2; }
 .default-primary-color { background: #2196F3; }
 .light-primary-color   { background: #BBDEFB; }
