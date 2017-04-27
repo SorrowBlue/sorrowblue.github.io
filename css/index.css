@@ -1,4 +1,3 @@
-
 .dark-primary-color    { background: #1976D2; }
 .default-primary-color { background: #2196F3; }
 .light-primary-color   { background: #BBDEFB; }
@@ -7,6 +6,23 @@
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
+body{
+	display: flex;
+	align-items: center;
+	min-height: 100vh;
+	flex-direction: column;
+}
+#container{
+    flex-grow: 1;
+}
+header{
+	width:100%;
+}
+footer{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
 ul {
   margin: 0;
   padding-left: 0;
