@@ -12,3 +12,53 @@ footer{
     justify-content: space-around;
     width: 100%;
 }
+.dark-primary-color    { background: #1976D2; }
+.default-primary-color { background: #2196F3; }
+.light-primary-color   { background: #BBDEFB; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF9800; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+ 
+li {
+  list-style: none;
+}
+ 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+ 
+#menu {
+  position: fixed;
+  top: 0;
+  right: -340px; /* ?????width + padding */
+  width: 300px; /* ?????width */
+  height: 100%;
+  padding: 20px;
+  transition: left .5s, right .5s; /* ??????? */
+  background-color: rgba(86, 86, 86, .7);
+}
+ 
+.toggle {
+  font-size: 50px;
+  cursor: pointer;
+}
+ 
+.toggle:hover {
+  text-decoration: underline;
+}
+ 
+#open {
+  display: none;
+}
+ 
+/* :checked ??????????#open??????????????#menu??right: 0;??????? */
+#open:checked + #menu {
+  right: 0;
+}
