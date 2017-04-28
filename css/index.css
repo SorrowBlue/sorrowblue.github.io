@@ -36,7 +36,7 @@ header{
 	flex-direction:row-reverse;
 	width:100%;
 	height: 14vh;
-      background: red;
+	background: #f8dce0 url("../images/home_header.png");
     }
    #content {
       flex: 1;
