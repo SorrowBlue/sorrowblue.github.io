@@ -34,10 +34,15 @@
 header{
 	display:flex;
 	flex-direction:row-reverse;
+	align-items:         center;
 	width:100%;
 	height: 14vh;
 	background: #f8dce0 url("../images/home_header.png");
-    }
+	background-size:cover;
+}
+header div{
+	
+}
    #content {
       flex: 1;
       background: yellow;
