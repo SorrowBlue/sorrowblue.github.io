@@ -10,30 +10,27 @@
 	<link rel="shortcut icon" type="image/png" href="images/icon_index.png">
 	
 	
-	
+	<link rel="stylesheet" type="text/css" href="css/pure-drawer.min.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/index.css" media="all">
-<link rel="stylesheet" type="text/css" href="css/pure-drawer.min.css" media="all">
+
 </head>
 <body>
 	<!-- data-effectで動きの設定ができます。 -->
-	<div class="pure-container" data-effect="pure-effect-scaleRotate">
+	<div class="pure-container" data-effect="pure-effect-zoom">
 		<input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left"/>
 		<label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left"><span class="pure-toggle-icon"></span></label>
-		<nav class="pure-drawer" data-position="left"><ul>
-			<!-- ここがドロワーメニュー -->
-			<li>リスト1</li>
-			<li>リスト2</li>
-			<li>リスト3</li>
-			<li>リスト4</li>
-			<li>リスト5</li>
-			<li>リスト6</li>
-			<li>リスト7</li>
-		</ul></nav>
+		<nav class="pure-drawer" id="drawer" data-position="left">
+			<div id=drawer_space></div>
+			<a href="index.html" class="drawer_item">Home</a>
+			<a href="blog/index.html" class="drawer_item">Blog</a>
+			<a href="mod/index.html" class="drawer_item">Mod</a>
+			<a href="link/index.html" class="drawer_item">Link</a>
+		</nav>
 		<div class="pure-pusher-container">
 			<div class="pure-pusher">
 				<div class="inner" id="body">
 					<header>
-						ペンタゴン
+						<div>SorrowBlueHome</div>
 					</header>
 					<div id="content"></div>
 					<footer>フッター</footer>

@@ -8,14 +8,34 @@
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
-  #body {
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
+.pure-drawer {
+  background-color: #009944;
+}
+
+#drawer{
+	display:flex;
+	flex-direction:column;
+	align-items:         center;
+}
+.drawer_item{
+	font-size:13vh;
+}
+#drawer_space{
+	height:14vh;
+}
+
+#body{
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+header{
+	display:flex;
+	flex-direction:row-reverse;
+	width:100%;
+	height: 14vh;
       background: red;
     }
    #content {
