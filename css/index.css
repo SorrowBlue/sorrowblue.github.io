@@ -1,67 +1,68 @@
-.dark-primary-color    { background: #1976D2; }
-.default-primary-color { background: #2196F3; }
-.light-primary-color   { background: #BBDEFB; }
-.text-primary-color    { color: #FFFFFF; }
-.accent-color          { background: #FF9800; }
-.primary-text-color    { color: #212121; }
-.secondary-text-color  { color: #757575; }
-.divider-color         { border-color: #BDBDBD; }
-body{
-	display: flex;
-	align-items: center;
-	min-height: 100vh;
-	flex-direction: column;
+/*テーマカラー	#43D8B2
+全体の背景#40FECE
+メニュー	#43B89A
+ロゴ	#555555
+本文見出し1	#34E5B8
+本文見出し2	#84FFE0
+サイドバー見出し#C1FFEF
+サイドバー背景	#EAFFFA*/
+
+.pure-drawer {
+  background-color: #43B89A;
 }
-#container{
-    flex-grow: 1;
+.pure-toggle-label {
+  border: none;
+}
+.pure-toggle-label .pure-toggle-icon,
+.pure-toggle-label .pure-toggle-icon:before,
+.pure-toggle-label .pure-toggle-icon:after {
+  background-color: #40FECE;
+}
+.pure-toggle-label:hover .pure-toggle-icon,
+.pure-toggle-label:hover .pure-toggle-icon:before,
+.pure-toggle-label:hover .pure-toggle-icon:after {
+  background-color: #43D8B2;
+}
+
+.drawer{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 10vh;
+	height: 100vh;
+	
+}
+
+#body{
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	min-height: 100vh;
 }
 header{
+	background: red;
+	display: flex;
+	flex-direction: row-reverse;
+	height: 10vw;
+	max-width: 950px;
+	max-height: 300px;
+	min-height: 80px;
+	font-size: 5vw;
+	background-image:url("../images/home_header.png");
+background-size: cover;
+	background-repeat: no-repeat;
+	
+	
 	width:100%;
 }
+#content{
+	flex: 1;
+	background: yellow;
+}
 footer{
-    display: flex;
-    justify-content: space-around;
+	background: blue;
     width: 100%;
-}
-ul {
-  margin: 0;
-  padding-left: 0;
-}
- 
-li {
-  list-style: none;
-}
- 
-a {
-  text-decoration: none;
-  color: #fff;
-}
- 
-#menu {
-  position: fixed;
-  top: 0;
-  right: -340px; /* ?????width + padding */
-  width: 300px; /* ?????width */
-  height: 100%;
-  padding: 20px;
-  transition: left .5s, right .5s; /* ??????? */
-  background-color: rgba(86, 86, 86, .7);
-}
- 
-.toggle {
-  font-size: 50px;
-  cursor: pointer;
-}
- 
-.toggle:hover {
-  text-decoration: underline;
-}
- 
-#open {
-  display: none;
-}
- 
-/* :checked ??????????#open??????????????#menu??right: 0;??????? */
-#open:checked + #menu {
-  right: 0;
 }
