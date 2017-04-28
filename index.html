@@ -12,29 +12,37 @@
 	
 	
 <link rel="stylesheet" type="text/css" href="css/index.css" media="all">
+<link rel="stylesheet" type="text/css" href="css/pure-drawer.min.css" media="all">
 </head>
 <body>
-	<!--
-	<div id="container">
-		メインコンテンツ
-		<img src="images/icon_index.png" alt="タイトル">
+	<!-- data-effectで動きの設定ができます。 -->
+	<div class="pure-container" data-effect="pure-effect-scaleRotate">
+		<input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left"/>
+		<label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left"><span class="pure-toggle-icon"></span></label>
+		<nav class="pure-drawer" data-position="left"><ul>
+			<!-- ここがドロワーメニュー -->
+			<li>リスト1</li>
+			<li>リスト2</li>
+			<li>リスト3</li>
+			<li>リスト4</li>
+			<li>リスト5</li>
+			<li>リスト6</li>
+			<li>リスト7</li>
+		</ul></nav>
+		<div class="pure-pusher-container">
+			<div class="pure-pusher">
+				<div class="inner" id="body">
+					<header>
+						ペンタゴン
+					</header>
+					<div id="content"></div>
+					<footer>フッター</footer>
+					
+				</div>
+			</div>
+		</div>
+		<!-- ボタンの位置をleft,top,rightから選べます。 -->
+		<label class="pure-overlay" for="pure-toggle-left" data-overlay="left"></label>
 	</div>
-	<footer class="default-primary-color">
-		<a href="">Contact Form</a>
-		<a href="">その他</a>
-    </footer>
-    -->
-    	<label class="toggle" for="open"><i class="fa fa-bars" aria-hidden="true">あ</i>
-</label>
-<input id="open" type="checkbox">
-<div id="menu">
-  <nav>
-    <ul>
-      <li><a href="#">HOME</a></li>
-      <li><a href="#">ABOUT</a></li>
-      <li><a href="#">BLOG</a></li>
-    </ul>
-  </nav>
-</div>
 </body>
 </html>
