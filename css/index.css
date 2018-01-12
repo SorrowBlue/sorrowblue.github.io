@@ -18,14 +18,14 @@
 header{
 	background: red;
 	display: flex;
-	flex-direction: row-reverse;
+	flex-direction: row;
 	height: 10vw;
 	max-width: 950px;
 	max-height: 300px;
 	min-height: 80px;
 	font-size: 5vw;
 	background-image:url("../images/home_header.png");
-background-size: cover;
+	background-size: cover;
 	background-repeat: no-repeat;
 	
 	
