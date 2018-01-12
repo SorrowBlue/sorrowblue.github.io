@@ -10,7 +10,11 @@
 	padding: 0;
 	margin: 0;
 }
-
+html {
+	display: dlex;
+	flex-direction: column;
+	justify-content: space-between;
+	
 header{
 	background: red;
 	display: flex;
