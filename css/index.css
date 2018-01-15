@@ -38,9 +38,10 @@ main{
 }
 
 #item {
-	box-shadow:1px 1px 1px 1px;
+	box-shadow:1px 1px 2px gray;
 	height: 100px;
-	width : 150px;
+	width: 150px;
+	margin:4px; 
 	
 }
 
