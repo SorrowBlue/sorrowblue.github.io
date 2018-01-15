@@ -17,9 +17,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	
-    min-height: 100vh;
-    width:100vh; 
+	min-height: 100vh;
+	width:100vh; 
 }
 header{
 	background: #43D8B2;
@@ -50,7 +49,7 @@ main{
 }
 
 footer{
-	background: blue;
-	height: 4vh;
-	width: 100%;
+	background: #43D8B2;;
+	height: 2vh;
+	width: 100vh;
 }
