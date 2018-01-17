@@ -18,13 +18,13 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 	min-height: 100vh;
-	width:100vh; 
+	width:100vw;
+	min-width: 300px;
 }
 header {
 	background: #43D8B2;
 	display: flex;
 	flex-direction: row;
-	width: 100vw;
 	box-shadow: 0px px 4px gray;
 	margin-bottom:16px;
 }
@@ -36,20 +36,20 @@ nav {
 main{
 	flex-grow: 1;
 	display: flex;
-	justfy-content: center;
-	
+	justify-content: space-around;
+	align-content: space-around;
+	flex-wrap: wrap;
 }
 
-#item {
+.item {
 	box-shadow:1px 1px 2px gray;
-	height: 100px;
-	width: 150px;
+	height: 200px;
+	width: 250px;
 	margin:4px; 
 	
 }
 
 footer{
-	background: #43D8B2;;
-	height: 2vh;
-	width: 100vh;
+	background: #43D8B2;
+	height: 2em;
 }
