@@ -20,12 +20,12 @@ body {
 	min-height: 100vh;
 	width:100vh; 
 }
-header{
+header {
 	background: #43D8B2;
 	display: flex;
 	flex-direction: row;
 	width: 100vw;
-	box-shadow: 0px 2px 4px gray;
+	box-shadow: 0px px 4px gray;
 	margin-bottom:16px;
 }
 
