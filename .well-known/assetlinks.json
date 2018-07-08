@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.sorrowblue.ncsss.debug",
+    "sha256_cert_fingerprints":
+    ["13:F9:79:91:94:1F:53:B4:E5:CB:62:26:A9:03:BC:EA:F0:03:FA:5E:70:DC:16:FB:1E:8D:55:23:9A:A4:BD:3F"]
+  }
+}]
