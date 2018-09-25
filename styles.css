@@ -1,15 +1,12 @@
----
----
-
 .portfolio-header {
 	position: relative;
 	background-image: url(images/header-bg.jpg);
-	.mdl-layout__header-row {
-		padding: 0;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-	}
+}
+.portfolio-header .mdl-layout__header-row {
+	padding: 0;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
 }
 
 .mdl-layout__title {
@@ -18,27 +15,21 @@
   font-weight: 300;
 }
 
-.is-compact {
-	.mdl-layout__title {
-		span {
-			display: none;
-		}
-	}
+.is-compact .mdl-layout__title span {
+	display: none;
 }
 
 .portfolio-logo-row {
   min-height: 200px;
 }
 
-.is-compact {
-	.portfolio-logo-row {
-		min-height: auto;
-	}
-	.portfolio-logo {
-		height: 50px;
-		width: 50px;
-		margin-top: 7px;
-	}
+.is-compact .portfolio-logo-row {
+	min-height: auto;
+}
+.is-compact.portfolio-logo {
+	height: 50px;
+	width: 50px;
+	margin-top: 7px;
 }
 
 .portfolio-logo {
@@ -54,17 +45,17 @@
   background-color: rgba(0, 0, 0, 0.08);
   text-transform: uppercase;
   height: 45px;
-	.mdl-navigation {
-		text-align: center;
-		max-width: 900px;
-		width: 100%;
-	}
-	.mdl-navigation__link {
-		-webkit-flex: 1;
-		-ms-flex: 1;
-		flex: 1;
-		line-height: 42px;
-	}
+}
+.portfolio-navigation-row .mdl-navigation {
+	text-align: center;
+	max-width: 900px;
+	width: 100%;
+}
+.portfolio-navigation-row .mdl-navigation__link {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	line-height: 42px;
 }
 
 
@@ -73,22 +64,21 @@
     background-color: rgba(197, 197, 197, 0.44);
 }
 
-.portfolio-navigation-row {
-	.is-active {
-		position: relative;
-		font-weight: bold;
-	}
-	.is-active:after {
-		content: "";
-		width: 70%;
-		height: 2px;
-		display: block;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		background-color: rgb(255,64,129);
-		left: 15%;
-	}
+.portfolio-navigation-row .is-active {
+	position: relative;
+	font-weight: bold;
+}
+
+.portfolio-navigation-row .is-active:after {
+	content: "";
+	width: 70%;
+	height: 2px;
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(255,64,129);
+	left: 15%;
 }
 
 .portfolio-card .mdl-card__title {
