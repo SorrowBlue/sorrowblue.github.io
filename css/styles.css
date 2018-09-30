@@ -168,9 +168,3 @@ footer {
   background-image: url(/images/footer-background.png);
   background-size: cover;
 }
-
-
-.mdl-chip__contact {
-	line-height:230%;
-  text-align:center;
-}
