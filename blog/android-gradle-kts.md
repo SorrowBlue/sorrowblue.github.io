@@ -1,0 +1,231 @@
+# Android: build.gradle.ktsのすゝめ
+
+
+## 環境
+
+|tool|version|
+|:-------------------:|:----------:|
+|Gradle               |5.4.1       |
+|Kotlin               |1.3.41      |
+|Android Studio       |3.5 Beta 5  |
+|Android Gradle Plugin|3.5.0-beta05|
+
+
+## 既存のプロジェクトへの導入
+
+1. 設定の変更
+`ファイル - 設定 - 言語＆フレームワーク - Kotlin - Kotlinスクリプト`
+ファイル変更時にスクリプト依存関係を再ロードする にチェックする
+![build_src](../images/settings_kotlin-script_reload.png)
+
+1. プロジェクトルートに `buildSrc` を作成  
+![build_src](../images/build_src.png)
+
+1. `buildSrc` に `build.gradle.kts` と `settings.gradle.kts` を作成
+![build-settings-gradle-kts](../images/build-settings-gradle-kts.png)
+
+1. `build.gradle.kts` に記述
+```kotlin:build.gradle.kts
+plugins {
+    `kotlin-dsl`
+}
+repositories {
+    jcenter()
+    google()
+}
+dependencies {
+    implementation("com.android.tools.build:gradle:3.5.0-beta05")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
+}
+```
+
+1. Sync now(今すぐ同期)
+![sync_now](../images/sync_now.png)
+
+1. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム
+![settings-gradle-kts](../images/settings-gradle-kts.png)
+
+1. `settings.gradle.kts` を編集
+```kotlin:settings.gradle.kts
+include(":app")
+rootProject.name = "My Application"
+```
+
+1. プロジェクトルートの `build.gradle` を `build.gradle.kts` にリネーム
+
+1. `build.gradle.kts` を編集
+```kotlin:build.gradle.kts
+buildscript {
+    repositories {
+        google()
+        jcenter()        
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:3.5.0-beta05")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
+    }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+       
+    }
+}
+task<Delete>("clean") { delete(rootProject.buildDir) }
+```
+
+1. `app/build.gradle` を `app/build.gradle.kts` にリネーム
+
+1. `app/build.gradle.kts` を編集
+
+```kotlin:app/build.gradle.kts
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+}
+android {
+    compileSdkVersion(29)
+    buildToolsVersion = "29.0.0"
+    defaultConfig {
+        applicationId = "com.sorrowblue.myapplication"
+        minSdkVersion(23)
+        targetSdkVersion(29)
+        versionCode =1
+        versionName ="1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+}
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41")
+    implementation("androidx.appcompat:appcompat:1.0.2")
+    implementation("androidx.core:core-ktx:1.0.2")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    testImplementation("junit:junit:4.12")
+    androidTestImplementation("androidx.test.ext:junit:1.1.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+}
+```
+1. Sync now(今すぐ同期)
+
+## スマートに書く
+`getByName("release")` このあたりを拡張関数で記述する
+
+1. `buildSrc/src/main/kotlin/Project.kt` を作成
+![new_create_project-kt.png](../images/new_create_project-kt.png)
+```kotlin:buildSrc/src/main/kotlin/Project.kt
+import com.android.build.gradle.internal.dsl.BuildType
+import org.gradle.api.NamedDomainObjectContainer
+fun NamedDomainObjectContainer<BuildType>.release(body: BuildType.() -> Unit) {
+    getByName("release") { body(this) }
+}
+```
+```kotlin:app/build.gradle.kts
+release {
+	isMinifyEnabled = false
+	proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+}
+```
+
+
+## 変数を定義
+もちろん変数も定義して使える
+
+1. `buildSrc/src/main/kotlin/Versions.kt` を作成
+```kotlin:buildSrc/src/main/kotlin/Versions.kt
+object Versions {
+	const val kotlin = "1.3.41"
+	const val appcompat = "1.0.2"
+	const val `core-ktx` = "1.0.2"
+	const val constraintlayout = "1.1.3"
+	const val junit = "4.12"
+    const val androidx_junit = "1.1.0"
+    const val `espresso-core` = "3.1.1"
+}
+```
+
+1. `buildSrc/src/main/kotlin/Deps.kt` を作成
+```kotlin:buildSrc/src/main/kotlin/Deps.kt
+object Deps {
+	const val `kotlin-stdlib-jdk7` = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+	const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
+    const val `core-ktx` = ("androidx.core:core-ktx:${Versions.`core-ktx`}")
+    const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout}"
+    const val junit = "junit:junit:${Versions.junit}"
+    const val androidx_junit = "androidx.test.ext:junit:${Versions.androidx_junit}"
+    const val `espresso-core` = "androidx.test.espresso:espresso-core:${Versions.`espresso-core`}"
+}
+```
+```kotlin:app/build.gradle.kts
+dependencies {
+    implementation(Deps.`kotlin-stdlib-jdk7`)
+    implementation(Deps.appcompat)
+    implementation(Deps.`core-ktx`)
+    implementation(Deps.constraintlayout)
+    testImplementation(Deps.junit)
+    androidTestImplementation(Deps.androidx_junit)
+    androidTestImplementation(Deps.`espresso-core`)
+}
+```
+
+## Tips
+
+### 各モジュールの `minSdkVersion` `targetSdkVersion` などをまとめる
+`Project.kt`
+```kotlin:build.gradle.kts
+fun Project.module(action: LibraryExtension.() -> Unit) {
+	afterEvaluate {
+		if (hasProperty("android") && project.name != "app") {
+			action(extensions.getByName("android") as LibraryExtension)
+		}
+	}
+}
+```
+`build.gradle.kts`
+```kotlin:build.gradle.kts
+subprojects {
+	module {
+		compileSdkVersion(COMPILE_SDK_VERSION)
+		defaultConfig {
+			minSdkVersion(MIN_SDK_VERSION)
+			targetSdkVersion(TARGET_SDK_VERSION)
+			consumerProguardFiles(`consumer-rules`)
+			testInstrumentationRunner = ANDROID_JUNIT_RUNNER
+		}
+	}
+}
+```
+
+###  任意の箇所でapplyしたいとき
+`app/build.gradle.kts`
+```kotlin:app/build.gradle.kts
+plugins {
+	id("com.google.gms.google-services") apply false
+}
+/*..........processing..........*/
+apply(plugin = "com.google.gms.google-services")
+```
+
+### プラグインを共通化したい
+`build.gradle.kts`
+```kotlin:build.gradle.kts
+subprojects {
+	if (project.name == "app") {
+		apply(plugin = "com.android.application")
+	} else {
+		apply(plugin = "com.android.library")
+	}
+	apply(plugin = "kotlin-android")
+	apply(plugin = "kotlin-android-extensions")
+}
+```
+
+
+
