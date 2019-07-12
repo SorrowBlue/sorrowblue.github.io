@@ -1,6 +1,4 @@
 body {
-	margin: 0;
-	padding: 0;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -15,6 +13,12 @@ header {
 	text-align: center;
 }
 
+main {
+	flex-grow: 1;
+	height: 1080px;
+}
+
+
 footer {
 	width: 100%;
 	display: flex;
@@ -23,21 +27,18 @@ footer {
 	background-image: url(/images/footer-background.png);
 	background-size: cover;
 	padding: 16px 0;
+
 }
 
-
-.portfolio-logo {
-	background: url(/images/logo.png) 50% no-repeat;
-	background-size: cover;
-	height: 150px;
-	width: 150px;
-	margin: auto auto 10px;
-}
 
 .mdc-tab-bar__content {
 	display: flex;
 	flex-wrap: wrap;
-	background-color: #EDEDED
+	/*	background-color: #EDEDED;*/
+}
+
+.mdc-tab__text-label--active {
+	color: white;
 }
 
 .footer_title {
