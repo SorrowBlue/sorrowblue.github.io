@@ -13,6 +13,7 @@ module.exports = {
   ],
 	// add your custom rules here
 	rules: {
+      "indent": "off",
 		"no-tabs": "off",
 		"vue/html-indent": "off"
 	}
