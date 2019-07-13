@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - "10"
+
+cache:
+  directories:
+    - "node_modules"
+
+branches:
+  only:
+  - gh-pages // 対象ブランチ
+
+install:
+  - npm install
+  - npm run generate
+
+script:
+  - echo "Skipping tests"
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_ACCESS_TOKEN // Travis CIのウェブページで設定した変数
+  target-branch: master // デプロイ先ブランチ
+  local-dir: dist // 対象ディレクトリ
+  on:
+    branch: gh-pages // 対象ブランチ

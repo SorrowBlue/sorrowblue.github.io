@@ -1,5 +1,9 @@
 .my-card__primary {
-	padding: 8px;
+	padding: 16px;
+}
+
+.my-card__title {
+	color: white;
 }
 
 .my--card__secondary {

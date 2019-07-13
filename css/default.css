@@ -27,7 +27,7 @@ footer {
 	background: #DEDEDE;
 }
 
-footer div {
+.footer-content {
 	display: flex;
 	justify-content: space-around;
 	margin: 8px;
