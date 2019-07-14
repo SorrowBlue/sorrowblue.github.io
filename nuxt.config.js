@@ -24,6 +24,11 @@ export default {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
+      },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       }
     ]
   },
@@ -47,8 +52,20 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify',
   ],
+  vuetify: {
+    theme: {
+      primary: '#2196f3',
+      secondary: '#e91e63',
+      accent: '#ff5722',
+      error: '#f44336',
+      warning: '#ffc107',
+      info: '#00bcd4',
+      success: '#4caf50'
+    }
+  },
   /*
    ** Build configuration
    */
@@ -57,5 +74,6 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  
 }
