@@ -49,7 +49,13 @@ export default {
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
+    '@nuxtjs/markdownit'
   ],
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true
+  },
   vuetify: {
     theme: {
       primary: '#2196f3',
@@ -68,7 +74,10 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  },
-  
+    extend(config, ctx) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
+  }
 }

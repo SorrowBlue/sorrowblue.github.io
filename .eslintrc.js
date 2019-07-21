@@ -13,10 +13,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "indent": "off",
-    "no-tabs": "off",
-    "vue/html-indent": "off",
-    "vue/no-unused-components": "off",
-    'vue/valid-v-on': 'off'
+    'vue/singleline-html-element-content-newline': 'off',
+    'semi': 'off',
+    'vue/no-v-html': 'off'
   }
 }
