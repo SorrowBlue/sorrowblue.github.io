@@ -1,6 +1,6 @@
 # Android: build.gradle.ktsのすゝめ
 [Github](https://github.com/SorrowBlue/AndroidGradleKts)
-
+[![Build Status](https://travis-ci.com/SorrowBlue/sorrowblue.github.io.svg?token=69SwqJzT2mqgmiiajAiQ&branch=gh-pages)](https://travis-ci.com/SorrowBlue/sorrowblue.github.io)
 
 ## 環境
 
