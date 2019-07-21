@@ -23,7 +23,7 @@ export default {
         typographer: true
       })
         .use(Sanitizer)
-        .use(Imsize, { autofill: true })
+        .use(Imsize)
         .render(data),
       params: query
     }
@@ -46,3 +46,11 @@ export default {
   }
 };
 </script>
+
+<style>
+img, code {
+  max-width: 100%;
+  height: auto;
+  word-wrap: break-word;
+}
+</style>
