@@ -2,7 +2,7 @@
   <v-container grid-list-md>
     <v-layout column>
       <v-flex v-for="data in datas" :key="data.title" xs12>
-        <v-card v-ripple :to="`/blog/${data.date}/${data.slug}`">
+        <v-card v-ripple :to="`/blog/content?date=${data.date}&slug=${data.slug}`">
           <v-card-title class="headline" v-text="data.title" />
           <v-card-text v-text="data.summary" />
         </v-card>

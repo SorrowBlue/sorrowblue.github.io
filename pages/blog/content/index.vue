@@ -12,10 +12,10 @@ export default {
   validate({ params }) {
     return true
   },
-  async asyncData({ params }) {
-    const { data } = await Axios.get(`/blog/${params.date}/${params.slug}.md`)
+  async asyncData({ params, query }) {
+    const { data } = await Axios.get(`/blog/${query.date}/${query.slug}.md`)
     return {
-      title: params.slug,
+      title: query.slug,
       bodyHtml: new MarkdownIt({
         highlight: (code, lang) => HighlightJs.highlightAuto(code, [lang]).value,
         linkify: true,
@@ -25,7 +25,7 @@ export default {
         .use(Sanitizer)
         .use(Imsize, { autofill: true })
         .render(data),
-      params: params
+      params: query
     }
   },
   head() {
