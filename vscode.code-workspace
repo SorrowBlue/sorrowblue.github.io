@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "E:\\GitHubRepo\\sorrowblue.github.io"
+		}
+	],
+	"settings": {
+		"files.autoSave": "onFocusChange",
+		"editor.tabSize": 2,
+		"editor.renderWhitespace": "boundary",
+		"files.exclude": {
+			"**/node_modules/**": true
+		},
+		"eslint.alwaysShowStatus": true
+	}
+}
