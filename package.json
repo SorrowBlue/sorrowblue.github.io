@@ -11,7 +11,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "md": "processmd 'content/blog/**/*.md --preview 90 --summaryOutput static/content/blog/summary.json --outputDir static/content/blog/json"
   },
   "dependencies": {
     "@nuxtjs/markdownit": "^1.2.6",

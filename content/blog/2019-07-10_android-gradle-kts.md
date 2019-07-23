@@ -17,6 +17,11 @@ date: 2019-07-10
 
 ## 既存のプロジェクトへの導入
 
+```kotlin
+val a = 0
+var awdw = "awdawd"
+```
+
 1. 設定の変更
 `ファイル - 設定 - 言語＆フレームワーク - Kotlin - Kotlinスクリプト`
 ファイル変更時にスクリプト依存関係を再ロードする にチェックする
@@ -58,7 +63,7 @@ rootProject.name = "My Application"
 1. プロジェクトルートの `build.gradle` を `build.gradle.kts` にリネーム
 
 1. `build.gradle.kts` を編集
-```kotlin:build.gradle.kts
+```kotlin
 buildscript {
     repositories {
         google()
@@ -83,7 +88,7 @@ task<Delete>("clean") { delete(rootProject.buildDir) }
 
 1. `app/build.gradle.kts` を編集
 
-```kotlin:app/build.gradle.kts
+```kotlin
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -124,14 +129,14 @@ dependencies {
 
 1. `buildSrc/src/main/kotlin/Project.kt` を作成
 ![new_create_project-kt.webp](/images/android-gradle-kts/new_create_project-kt.webp)
-```kotlin:buildSrc/src/main/kotlin/Project.kt
+```kotlin
 import com.android.build.gradle.internal.dsl.BuildType
 import org.gradle.api.NamedDomainObjectContainer
 fun NamedDomainObjectContainer<BuildType>.release(body: BuildType.() -> Unit) {
     getByName("release") { body(this) }
 }
 ```
-```kotlin:app/build.gradle.kts
+```kotlin
 release {
 	isMinifyEnabled = false
 	proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -143,7 +148,7 @@ release {
 もちろん変数も定義して使える
 
 1. `buildSrc/src/main/kotlin/Versions.kt` を作成
-```kotlin:buildSrc/src/main/kotlin/Versions.kt
+```kotlin
 object Versions {
 	const val kotlin = "1.3.41"
 	const val appcompat = "1.0.2"
@@ -156,7 +161,7 @@ object Versions {
 ```
 
 1. `buildSrc/src/main/kotlin/Deps.kt` を作成
-```kotlin:buildSrc/src/main/kotlin/Deps.kt
+```kotlin
 object Deps {
 	const val `kotlin-stdlib-jdk7` = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
 	const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
@@ -167,7 +172,7 @@ object Deps {
     const val `espresso-core` = "androidx.test.espresso:espresso-core:${Versions.`espresso-core`}"
 }
 ```
-```kotlin:app/build.gradle.kts
+```kotlin
 dependencies {
     implementation(Deps.`kotlin-stdlib-jdk7`)
     implementation(Deps.appcompat)
@@ -183,7 +188,7 @@ dependencies {
 
 ### 各モジュールの `minSdkVersion` `targetSdkVersion` などをまとめる
 `Project.kt`
-```kotlin:build.gradle.kts
+```kotlin
 fun Project.module(action: LibraryExtension.() -> Unit) {
 	afterEvaluate {
 		if (hasProperty("android") && project.name != "app") {
@@ -193,7 +198,7 @@ fun Project.module(action: LibraryExtension.() -> Unit) {
 }
 ```
 `build.gradle.kts`
-```kotlin:build.gradle.kts
+```kotlin
 subprojects {
 	module {
 		compileSdkVersion(COMPILE_SDK_VERSION)
@@ -209,7 +214,7 @@ subprojects {
 
 ###  任意の箇所でapplyしたいとき
 `app/build.gradle.kts`
-```kotlin:app/build.gradle.kts
+```kotlin
 plugins {
 	id("com.google.gms.google-services") apply false
 }
@@ -219,7 +224,7 @@ apply(plugin = "com.google.gms.google-services")
 
 ### プラグインを共通化したい
 `build.gradle.kts`
-```kotlin:build.gradle.kts
+```kotlin
 subprojects {
 	if (project.name == "app") {
 		apply(plugin = "com.android.application")
@@ -230,6 +235,3 @@ subprojects {
 	apply(plugin = "kotlin-android-extensions")
 }
 ```
-
-
-
