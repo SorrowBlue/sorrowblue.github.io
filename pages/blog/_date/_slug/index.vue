@@ -23,15 +23,17 @@ export default {
     return {
       title: title,
       meta: [
-        { hid: "og:url", property: "og:url", content: url },
-        { hid: "og:title", property: "og:title", content: title }
+        { hid: 'og:url', property: 'og:url', content: url },
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:image', property: 'og:image', content: 'https://sorrowblue.com/images/blog.webp' },
+        { hid: 'og:title', property: 'og:title', content: title },
+        { hid: 'og:site_name', property: 'og:site_name', content: 'sorrowblue.github.io' }
       ],
       link: [
-        { rel: "canonical", href: url },
+        { rel: 'canonica', href: url },
         {
-          rel: "stylesheet",
-          href:
-            "http://raw.githubusercontent.com/yrgoldteeth/darkdowncss/raw/master/darkdown.css"
+          rel: 'stylesheet',
+          href: 'http://raw.githubusercontent.com/yrgoldteeth/darkdowncss/raw/master/darkdown.css'
         }
       ]
     };

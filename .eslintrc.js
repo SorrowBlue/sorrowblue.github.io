@@ -14,7 +14,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     'vue/singleline-html-element-content-newline': 'off',
-    'semi': 'off',
+    'semi': 'on',
     'vue/no-v-html': 'off'
   }
 }
