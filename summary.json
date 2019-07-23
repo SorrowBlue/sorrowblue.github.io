@@ -1,0 +1,17 @@
+{
+  "fileMap": {
+    "static/content/blog/json/2019-07-10_android-gradle-kts.json": {
+      "date": "2019-07-10T00:00:00.000Z",
+      "preview": "Android: build.gradle.ktsのすゝめ\nGithub\nBuild",
+      "title": "Android: build.gradle.ktsのすゝめ",
+      "dir": "static/content/blog/json",
+      "base": "2019-07-10_android-gradle-kts.json",
+      "ext": ".json",
+      "sourceBase": "2019-07-10_android-gradle-kts.md",
+      "sourceExt": ".md"
+    }
+  },
+  "sourceFileArray": [
+    "content/blog/2019-07-10_android-gradle-kts.md"
+  ]
+}

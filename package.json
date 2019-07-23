@@ -40,7 +40,9 @@
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
     "jest": "^24.1.0",
+    "json-loader": "^0.5.7",
     "nodemon": "^1.18.9",
+    "processmd": "^4.4.2",
     "vue-jest": "^3.0.3"
   }
 }

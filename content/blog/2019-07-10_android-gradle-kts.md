@@ -1,3 +1,6 @@
+---
+date: 2019-07-10
+---
 # Android: build.gradle.ktsのすゝめ
 [Github](https://github.com/SorrowBlue/AndroidGradleKts)
 [![Build Status](https://travis-ci.com/SorrowBlue/sorrowblue.github.io.svg?token=69SwqJzT2mqgmiiajAiQ&branch=gh-pages)](https://travis-ci.com/SorrowBlue/sorrowblue.github.io)
@@ -26,7 +29,7 @@
 ![build-settings-gradle-kts](/images/android-gradle-kts/build-settings-gradle-kts.webp)
 
 1. `build.gradle.kts` に記述
-```kotlin:build.gradle.kts
+```kotlin
 plugins {
     `kotlin-dsl`
 }
@@ -47,7 +50,7 @@ dependencies {
 ![settings-gradle-kts](/images/android-gradle-kts/settings-gradle-kts.webp)
 
 1. `settings.gradle.kts` を編集
-```kotlin:settings.gradle.kts
+```kotlin
 include(":app")
 rootProject.name = "My Application"
 ```

@@ -1,5 +1,16 @@
+import sourceFileNameToUrl from './assets/js/sourceFileNameToUri.js'
+import { sourceFileArray } from './static/content/blog/summary.json'
+
+const generateDynamicRoutes = (callback) => {
+  const routes = sourceFileArray.map(sourceFileName => sourceFileNameToUrl(sourceFileName))
+  callback(null, routes)
+}
+
 export default {
   mode: 'spa',
+  generate: {
+    routes: generateDynamicRoutes
+  },
   /*
    ** Headers of the page
    */
