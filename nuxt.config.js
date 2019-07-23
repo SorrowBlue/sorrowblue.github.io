@@ -28,6 +28,10 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
+      },
+      {
+        property: 'og:image',
+        content: 'https://sorrowblue.com/images/blog.webp'
       }
     ],
     script: [
