@@ -10,7 +10,7 @@ export default {
     return true
   },
   asyncData({ params }) {
-    const data = require(`static/content/blog/json/${params.date}_${params.slug}.json`)
+    const data = require(`~/static/content/blog/json/${params.date}_${params.slug}.json`)
     return {
       title: data.title,
       bodyHtml: data.bodyHtml,

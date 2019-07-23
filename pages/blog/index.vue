@@ -2,7 +2,7 @@
   <v-container grid-list-md>
     <v-layout column>
       <v-flex v-for="data in datas" :key="data.title" xs12>
-        <v-card v-ripple :to="`/blog/${data.date}/${data.slug}`">
+        <v-card v-ripple :to="`/blog/${data.date}/${data.slug}/`">
           <v-card-title class="headline" v-text="data.slug" />
           <v-card-text v-text="data.date" />
         </v-card>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { sourceFileArray } from '../../static/content/blog/summary.json'
+import { sourceFileArray } from '~/static/content/blog/summary.json'
 
 const pathToData = (filepath) => {
   const deleteExt = filepath.replace('.md', '')
