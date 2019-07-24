@@ -14,7 +14,7 @@
 <script>
 import { fileMap } from '~/static/content/blog/summary.json'
 
-const pathToUri = (filepath) => {
+const pathToUri = filepath => {
   const fileName = filepath.replace('.md', '')
   const splitArray = fileName.split('_')
   return splitArray.join('/')
@@ -33,5 +33,4 @@ export default {
     datas: fileArray()
   })
 }
-
 </script>

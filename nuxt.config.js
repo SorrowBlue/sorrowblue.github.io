@@ -1,88 +1,67 @@
 import sourceFileNameToUrl from './assets/js/sourceFileNameToUri.js'
 import { sourceFileArray } from './static/content/blog/summary.json'
 
-const generateDynamicRoutes = (callback) => {
-  const routes = sourceFileArray.map(sourceFileName => sourceFileNameToUrl(sourceFileName))
-  callback(null, routes)
-}
-
 export default {
   mode: 'spa',
   generate: {
-    routes: generateDynamicRoutes
+    routes: callback =>
+      callback(
+        null,
+        sourceFileArray.map(sourceFileName =>
+          sourceFileNameToUrl(sourceFileName)
+        )
+      )
   },
   /*
    ** Headers of the page
    */
   head: {
+    titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
     meta: [
-      {
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
-      },
-      {
-        property: 'og:image',
-        content: 'https://sorrowblue.com/images/blog.webp'
       }
     ],
-    script: [
-      { src: '/js/404-redirect-ghpages.js' }
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+    script: [{ src: '/js/404-redirect-ghpages.js' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: {
-    color: '#fff'
-  },
+  loading: { color: '#fff' },
   /*
    ** Global CSS
    */
-  css: [
-  ],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-  ],
+  plugins: [],
   /*
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
-    '@nuxtjs/markdownit'
+    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/eslint-module'
   ],
-  markdownit: {
-    preset: 'default',
-    linkify: true,
-    breaks: true
-  },
   vuetify: {
     theme: {
-      primary: '#2196f3',
-      secondary: '#e91e63',
-      accent: '#ff5722',
-      error: '#f44336',
-      warning: '#ffc107',
-      info: '#00bcd4',
-      success: '#4caf50'
+      dark: true
+      // primary: colors.blue.darken2,
+      // accent: colors.grey.darken3,
+      // secondary: colors.amber.darken3,
+      // info: colors.teal.lighten1,
+      // warning: colors.amber.base,
+      // error: colors.deepOrange.accent4,
+      // success: colors.green.accent3
     }
   },
   /*
@@ -92,10 +71,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
-      config.node = {
-        fs: 'empty'
-      }
-    }
+    extend(config, ctx) {}
   }
 }

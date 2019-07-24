@@ -1,21 +1,21 @@
 <template>
   <v-app dark>
-    <v-toolbar app fixed :prominent="$vuetify.breakpoint.xs" :extended="$vuetify.breakpoint.xs">
+    <v-app-bar app fixed>
       <router-link class="toolbar__title" to="/">
         <v-toolbar-title v-text="title" />
       </router-link>
       <v-spacer />
       <template v-if="!$vuetify.breakpoint.xs">
         <v-toolbar-items v-for="global in globals" :key="global.title">
-          <v-btn flat :to="global.link" v-text="global.title" />
+          <v-btn text :to="global.link" v-text="global.title" />
         </v-toolbar-items>
       </template>
       <template v-if="$vuetify.breakpoint.xs" v-slot:extension>
         <v-toolbar-items v-for="global in globals" :key="global.title">
-          <v-btn flat :to="global.link" v-text="global.title" />
+          <v-btn text :to="global.link" v-text="global.title" />
         </v-toolbar-items>
       </template>
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <v-container>
         <nuxt />
@@ -40,7 +40,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
