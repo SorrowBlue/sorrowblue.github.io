@@ -7,8 +7,8 @@
           :to="isInternalLink(card.link) ? card.link : ''"
           :href="isInternalLink(card.link) ? '' : card.link"
         >
-          <!-- :aspect-ratio="16/9" -->
-          <v-img :src="card.src" height="200px">
+          <!-- prettier-ignore -->
+          <v-img :src="card.src" :aspect-ratio="16/9">
             <v-card-title class="align-end fill-height" v-text="card.title" />
           </v-img>
           <v-card-text v-text="card.desc" />

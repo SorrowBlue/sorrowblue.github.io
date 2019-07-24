@@ -1,5 +1,8 @@
 ---
-date: 2019-07-10
+title: Android build.gradle.ktsのすゝめ
+desc: Android build.gradle.ktsのすゝめ
+date: 2019/07/10
+tags: Android Kotlin
 ---
 # Android: build.gradle.ktsのすゝめ
 [Github](https://github.com/SorrowBlue/AndroidGradleKts)

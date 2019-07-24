@@ -1,17 +1,30 @@
 {
   "fileMap": {
     "static/content/blog/json/2019-07-10_android-gradle-kts.json": {
+      "title": "Android build.gradle.ktsのすゝめ",
+      "desc": "Android build.gradle.ktsのすゝめ",
       "date": "2019-07-10T00:00:00.000Z",
-      "preview": "Android: build.gradle.ktsのすゝめ\nGithub\nBuild",
-      "title": "Android: build.gradle.ktsのすゝめ",
+      "tags": "Android Kotlin",
       "dir": "static/content/blog/json",
       "base": "2019-07-10_android-gradle-kts.json",
       "ext": ".json",
       "sourceBase": "2019-07-10_android-gradle-kts.md",
       "sourceExt": ".md"
+    },
+    "static/content/blog/json/2019-07-23_non-null-livedata.json": {
+      "title": "NullチェックのいらないLiveData",
+      "desc": "android-architecture-componentsのLiveDataでNullableにしない方法",
+      "date": "2019/07/23",
+      "tags": "Android Kotlin",
+      "dir": "static/content/blog/json",
+      "base": "2019-07-23_non-null-livedata.json",
+      "ext": ".json",
+      "sourceBase": "2019-07-23_non-null-livedata.md",
+      "sourceExt": ".md"
     }
   },
   "sourceFileArray": [
-    "content/blog/2019-07-10_android-gradle-kts.md"
+    "content/blog/2019-07-10_android-gradle-kts.md",
+    "content/blog/2019-07-23_non-null-livedata.md"
   ]
 }
