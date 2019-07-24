@@ -8,15 +8,10 @@
           :href="isInternalLink(card.link) ? '' : card.link"
         >
           <!-- :aspect-ratio="16/9" -->
-          <v-img :src="card.src" />
-          <v-card-title primary-title>
-            <v-layout align-center justify-space-between row wrap>
-              <h3 headline v-text="card.title" />
-              <v-btn flat outline :ripple="false">
-                Read more
-              </v-btn>
-            </v-layout>
-          </v-card-title>
+          <v-img :src="card.src" height="200px">
+            <v-card-title class="align-end fill-height" v-text="card.title" />
+          </v-img>
+          <v-card-text v-text="card.desc" />
         </v-card>
       </v-flex>
     </v-layout>
@@ -30,10 +25,21 @@ export default {
       {
         title: 'Mymetable',
         src: '/images/mymetable.webp',
-        link: 'https://mymetableapp.sorrowblue.com/'
+        link: 'https://mymetableapp.sorrowblue.com/',
+        desc: '時間割を管理するアプリです。'
       },
-      { title: 'Blog', src: '/images/blog.webp', link: '/blog' },
-      { title: 'Portfolio', src: '/images/portfolio.webp', link: '/blog' }
+      {
+        title: 'Blog',
+        src: '/images/blog.webp',
+        link: '/blog',
+        desc: 'ブログです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      }
     ]
   }),
   methods: {
