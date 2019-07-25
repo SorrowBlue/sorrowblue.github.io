@@ -1,9 +1,8 @@
 <template>
-  <v-container grid-list-xl>
+  <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg4 xl4>
+      <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
         <v-card
-          v-ripple
           :to="isInternalLink(card.link) ? card.link : ''"
           :href="isInternalLink(card.link) ? '' : card.link"
         >
@@ -33,6 +32,36 @@ export default {
         src: '/images/blog.webp',
         link: '/blog',
         desc: 'ブログです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
       },
       {
         title: 'Portfolio',
