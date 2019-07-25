@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md>
+  <v-container grid-list-xl>
     <v-layout row wrap>
       <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg4 xl4>
         <v-card
