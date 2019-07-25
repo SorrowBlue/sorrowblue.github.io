@@ -54,11 +54,9 @@ export default {
 @import '@/assets/css/tomorrow-night.css';
 </style>
 
-<style scoped>
+<style>
 img,
 code {
-  max-width: 100%;
-  height: auto;
-  word-wrap: break-word;
+  max-width: 95%;
 }
 </style>

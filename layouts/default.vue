@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <v-app-bar app fixed>
       <router-link class="toolbar__title" to="/">
         <v-toolbar-title v-text="title" />
@@ -17,9 +17,7 @@
       </template>
     </v-app-bar>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-footer app fixed>
       <span>&copy; 2017</span>

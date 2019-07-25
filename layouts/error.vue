@@ -1,9 +1,20 @@
 <template>
-  <div class="container">
-    <h1 v-if="error.statusCode === 404">ページが見つかりません</h1>
-    <h1 v-else>エラーが発生しました</h1>
-    <nuxt-link to="/">ホーム</nuxt-link>
-  </div>
+  <v-container grid-list-md fill-height>
+    <v-layout row>
+      <v-flex xs12>
+        <v-layout align-end justify-center row fill-height>
+          <p class="display-4 fuwafuwa4">4</p>
+          <p class="display-4 fuwafuwa0">0</p>
+          <p class="display-4 fuwafuwa4">4</p>
+        </v-layout>
+      </v-flex>
+      <v-flex xs12>
+        <v-layout align-start justify-center row fill-height>
+          <p class="display-1">ページが見つかりませんでした</p>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -15,6 +26,48 @@ export default {
       default: ''
     }
   },
-  layout: 'blog' // エラーページ用のカスタムレイアウトを指定できます
+  data: () => ({
+    show: true
+  }),
+  mounted() {
+    this.show = !this.show
+  },
+  methods: {
+    setShow() {
+      this.show = !this.show
+    }
+  }
 }
 </script>
+
+<style>
+.fuwafuwa4 {
+  animation: fuwafuwa4 3s infinite linear alternate;
+}
+@keyframes fuwafuwa4 {
+  0% {
+    transform: translateY(0) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(-5vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0) rotate(10deg);
+  }
+}
+
+.fuwafuwa0 {
+  animation: fuwafuwa0 3s infinite linear alternate;
+}
+@keyframes fuwafuwa0 {
+  0% {
+    transform: translateY(-5vh) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-5vh) rotate(10deg);
+  }
+}
+</style>
