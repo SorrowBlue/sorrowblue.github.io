@@ -1,20 +1,18 @@
 <template>
-  <v-container grid-list-md>
-    <v-layout align-center justify-start row wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
-        <v-card
-          :to="isInternalLink(card.link) ? card.link : ''"
-          :href="isInternalLink(card.link) ? '' : card.link"
-        >
-          <!-- prettier-ignore -->
-          <v-img :src="card.src" :aspect-ratio="16/9">
-            <v-card-title class="align-end fill-height" v-text="card.title" />
-          </v-img>
-          <v-card-text v-text="card.desc" />
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row wrap justify-center align-center>
+    <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
+      <v-card
+        :to="isInternalLink(card.link) ? card.link : ''"
+        :href="isInternalLink(card.link) ? '' : card.link"
+      >
+        <!-- prettier-ignore -->
+        <v-img :src="card.src" :aspect-ratio="16/9">
+          <v-card-title class="align-end fill-height" v-text="card.title" />
+        </v-img>
+        <v-card-text v-text="card.desc" />
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>

@@ -17,7 +17,9 @@
       </template>
     </v-app-bar>
     <v-content>
-      <nuxt />
+      <v-container>
+        <nuxt />
+      </v-container>
     </v-content>
     <v-footer app fixed>
       <span>&copy; 2017</span>
