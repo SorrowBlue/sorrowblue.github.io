@@ -1,10 +1,10 @@
 <template>
   <v-layout wrap>
     <v-flex xs12 mt-5>
-      <v-layout row justify-center>
-        <v-flex xs1 class="display-4 fuwafuwa4">4</v-flex>
-        <v-flex xs1 class="display-4 fuwafuwa0">0</v-flex>
-        <v-flex xs1 class="display-4 fuwafuwa4">4</v-flex>
+      <v-layout row justify-center class="text-xs-center">
+        <v-flex xs2 sm1 class="display-4">4</v-flex>
+        <v-flex xs2 sm1 class="display-4">0</v-flex>
+        <v-flex xs2 sm1 class="display-4">4</v-flex>
       </v-layout>
     </v-flex>
     <v-flex xs12>
