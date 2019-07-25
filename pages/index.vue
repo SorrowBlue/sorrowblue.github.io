@@ -1,5 +1,5 @@
 <template>
-  <v-layout row wrap justify-center align-center>
+  <v-layout ma-5 row wrap justify-start align-center>
     <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
       <v-card
         :to="isInternalLink(card.link) ? card.link : ''"
@@ -30,36 +30,6 @@ export default {
         src: '/images/blog.webp',
         link: '/blog',
         desc: 'ブログです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
       },
       {
         title: 'Portfolio',
