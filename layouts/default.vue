@@ -17,7 +17,7 @@
       </template>
     </v-app-bar>
     <v-content>
-      <v-container>
+      <v-container grid-list-md ma-3>
         <nuxt />
       </v-container>
     </v-content>
