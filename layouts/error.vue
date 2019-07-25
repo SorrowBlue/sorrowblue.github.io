@@ -10,7 +10,7 @@
       </v-flex>
       <v-flex>
         <v-layout align-start justify-center row fill-height>
-          <p class="display-1">ページが見つかりませんでした</p>
+          <p class="display-1">Error</p>
         </v-layout>
       </v-flex>
     </v-layout>
