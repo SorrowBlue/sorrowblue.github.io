@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4>
+      <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg4 xl4>
         <v-card
           v-ripple
           :to="isInternalLink(card.link) ? card.link : ''"
