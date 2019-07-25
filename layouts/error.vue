@@ -1,14 +1,14 @@
 <template>
   <v-container grid-list-md fill-height>
     <v-layout row>
-      <v-flex xs12>
+      <v-flex xs12 sm12 md12 lg12 xl12>
         <v-layout align-end justify-center row fill-height>
           <p class="display-4 fuwafuwa4">4</p>
           <p class="display-4 fuwafuwa0">0</p>
           <p class="display-4 fuwafuwa4">4</p>
         </v-layout>
       </v-flex>
-      <v-flex xs12>
+      <v-flex>
         <v-layout align-start justify-center row fill-height>
           <p class="display-1">ページが見つかりませんでした</p>
         </v-layout>
