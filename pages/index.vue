@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-md>
-    <v-layout row>
+    <v-layout align-center justify-start row wrap>
       <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
         <v-card
           :to="isInternalLink(card.link) ? card.link : ''"
