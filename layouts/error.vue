@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout wrap text-center>
     <v-flex xs12 mt-5>
       <v-layout row justify-center class="text-xs-center">
         <v-flex xs2 sm1 class="display-4">4</v-flex>
@@ -9,7 +9,9 @@
     </v-flex>
     <v-flex xs12>
       <v-layout justify-center>
-        <div class="display-1">ページが見つかりませんでした</div>
+        <div class="display-1">
+          sorrowblue.com{{ this.$route.path }}は見つかりませんでした
+        </div>
       </v-layout>
     </v-flex>
   </v-layout>
@@ -17,23 +19,11 @@
 
 <script>
 export default {
-  props: {
-    error: {
-      type: String,
-      required: false,
-      default: ''
-    }
-  },
   data: () => ({
-    show: true
+    onon: 'dawdw'
   }),
-  mounted() {
-    this.show = !this.show
-  },
-  methods: {
-    setShow() {
-      this.show = !this.show
-    }
+  asyncData({ params }) {
+    return { title: params }
   }
 }
 </script>
