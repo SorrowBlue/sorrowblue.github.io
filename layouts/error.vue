@@ -1,17 +1,15 @@
 <template>
-  <v-layout wrap text-center>
-    <v-flex xs12 mt-5>
+  <v-layout column wrap text-center justify-center>
+    <v-flex xs1 mt-5>
       <v-layout row justify-center class="text-xs-center">
-        <v-flex xs2 sm1 class="display-4">4</v-flex>
-        <v-flex xs2 sm1 class="display-4">0</v-flex>
-        <v-flex xs2 sm1 class="display-4">4</v-flex>
+        <v-flex xs2 sm1 class="display-4 fuwafuwa4">4</v-flex>
+        <v-flex xs2 sm1 class="display-4 fuwafuwa0">0</v-flex>
+        <v-flex xs2 sm1 class="display-4 fuwafuwa4">4</v-flex>
       </v-layout>
     </v-flex>
-    <v-flex xs12>
+    <v-flex xs1>
       <v-layout justify-center>
-        <div class="display-1">
-          sorrowblue.com{{ this.$route.path }}は見つかりませんでした
-        </div>
+        <p class="display-1">Not found page.</p>
       </v-layout>
     </v-flex>
   </v-layout>
@@ -19,9 +17,7 @@
 
 <script>
 export default {
-  data: () => ({
-    onon: 'dawdw'
-  }),
+  data: () => ({ onon: 'dawdw' }),
   asyncData({ params }) {
     return { title: params }
   }

@@ -17,7 +17,7 @@
       </template>
     </v-app-bar>
     <v-content>
-      <v-container grid-list-md>
+      <v-container grid-list-md fill-height>
         <nuxt />
       </v-container>
     </v-content>
