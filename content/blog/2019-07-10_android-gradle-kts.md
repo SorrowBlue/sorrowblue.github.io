@@ -20,20 +20,15 @@ tags: Android Kotlin
 
 ## 既存のプロジェクトへの導入
 
-```kotlin
-val a = 0
-var awdw = "awdawd"
-```
-
 1. 設定の変更
 `ファイル - 設定 - 言語＆フレームワーク - Kotlin - Kotlinスクリプト`
-ファイル変更時にスクリプト依存関係を再ロードする にチェックする
+ファイル変更時にスクリプト依存関係を再ロードする にチェックする  
 ![build_src](/images/android-gradle-kts/settings_kotlin-script_reload.webp)
 
 1. プロジェクトルートに `buildSrc` を作成  
 ![build_src](/images/android-gradle-kts/build_src.webp)
 
-1. `buildSrc` に `build.gradle.kts` と `settings.gradle.kts` を作成
+1. `buildSrc` に `build.gradle.kts` と `settings.gradle.kts` を作成  
 ![build-settings-gradle-kts](/images/android-gradle-kts/build-settings-gradle-kts.webp)
 
 1. `build.gradle.kts` に記述
@@ -51,10 +46,10 @@ dependencies {
 }
 ```
 
-1. Sync now(今すぐ同期)
+1. Sync now(今すぐ同期)  
 ![sync_now](/images/android-gradle-kts/sync_now.webp)
 
-1. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム
+1. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム  
 ![settings-gradle-kts](/images/android-gradle-kts/settings-gradle-kts.webp)
 
 1. `settings.gradle.kts` を編集
@@ -130,7 +125,7 @@ dependencies {
 ## スマートに書く
 `getByName("release")` このあたりを拡張関数で記述する
 
-1. `buildSrc/src/main/kotlin/Project.kt` を作成
+1. `buildSrc/src/main/kotlin/Project.kt` を作成  
 ![new_create_project-kt.webp](/images/android-gradle-kts/new_create_project-kt.webp)
 ```kotlin
 import com.android.build.gradle.internal.dsl.BuildType
