@@ -27,7 +27,6 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    script: [{ src: '/js/404-redirect-ghpages.js' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   /*

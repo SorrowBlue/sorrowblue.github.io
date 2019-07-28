@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app fixed>
+    <v-app-bar app fixed hide-on-scroll>
       <router-link class="toolbar__title" to="/">
         <v-toolbar-title v-text="title" />
       </router-link>
@@ -17,11 +17,9 @@
       </template>
     </v-app-bar>
     <v-content>
-      <v-container grid-list-md fill-height>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
-    <v-footer app fixed>
+    <v-footer>
       <span>&copy; 2017</span>
     </v-footer>
   </v-app>
