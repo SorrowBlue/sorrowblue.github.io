@@ -32,6 +32,7 @@ tags: Android Kotlin
 ![build-settings-gradle-kts](/images/android-gradle-kts/build-settings-gradle-kts.webp)
 
 1. `build.gradle.kts` に記述
+
 ```kotlin
 plugins {
     `kotlin-dsl`
@@ -46,21 +47,20 @@ dependencies {
 }
 ```
 
-1. Sync now(今すぐ同期)  
+5. Sync now(今すぐ同期)  
 ![sync_now](/images/android-gradle-kts/sync_now.webp)
 
-1. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム  
+6. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム  
 ![settings-gradle-kts](/images/android-gradle-kts/settings-gradle-kts.webp)
 
-1. `settings.gradle.kts` を編集
+7. `settings.gradle.kts` を編集
 ```kotlin
 include(":app")
 rootProject.name = "My Application"
 ```
+8. プロジェクトルートの `build.gradle` を `build.gradle.kts` にリネーム
 
-1. プロジェクトルートの `build.gradle` を `build.gradle.kts` にリネーム
-
-1. `build.gradle.kts` を編集
+9.  `build.gradle.kts` を編集
 ```kotlin
 buildscript {
     repositories {
@@ -82,9 +82,9 @@ allprojects {
 task<Delete>("clean") { delete(rootProject.buildDir) }
 ```
 
-1. `app/build.gradle` を `app/build.gradle.kts` にリネーム
+10. `app/build.gradle` を `app/build.gradle.kts` にリネーム
 
-1. `app/build.gradle.kts` を編集
+11. `app/build.gradle.kts` を編集
 
 ```kotlin
 plugins {
@@ -120,13 +120,14 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 }
 ```
-1. Sync now(今すぐ同期)
+12. Sync now(今すぐ同期)
 
 ## スマートに書く
-`getByName("release")` このあたりを拡張関数で記述する
+`getByName("release")` このあたりを拡張関数で記述する  
 
-1. `buildSrc/src/main/kotlin/Project.kt` を作成  
-![new_create_project-kt.webp](/images/android-gradle-kts/new_create_project-kt.webp)
+`buildSrc/src/main/kotlin/Project.kt` を作成  
+
+`Project.kt`
 ```kotlin
 import com.android.build.gradle.internal.dsl.BuildType
 import org.gradle.api.NamedDomainObjectContainer
@@ -134,6 +135,8 @@ fun NamedDomainObjectContainer<BuildType>.release(body: BuildType.() -> Unit) {
     getByName("release") { body(this) }
 }
 ```
+
+`app/build.gradle.kts`
 ```kotlin
 release {
 	isMinifyEnabled = false
@@ -145,7 +148,7 @@ release {
 ## 変数を定義
 もちろん変数も定義して使える
 
-1. `buildSrc/src/main/kotlin/Versions.kt` を作成
+`buildSrc/src/main/kotlin/Versions.kt`
 ```kotlin
 object Versions {
 	const val kotlin = "1.3.41"
@@ -158,7 +161,7 @@ object Versions {
 }
 ```
 
-1. `buildSrc/src/main/kotlin/Deps.kt` を作成
+`buildSrc/src/main/kotlin/Deps.kt`
 ```kotlin
 object Deps {
 	const val `kotlin-stdlib-jdk7` = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
@@ -170,6 +173,8 @@ object Deps {
     const val `espresso-core` = "androidx.test.espresso:espresso-core:${Versions.`espresso-core`}"
 }
 ```
+
+`app/build.gradle.kts`
 ```kotlin
 dependencies {
     implementation(Deps.`kotlin-stdlib-jdk7`)
@@ -185,6 +190,7 @@ dependencies {
 ## Tips
 
 ### 各モジュールの `minSdkVersion` `targetSdkVersion` などをまとめる
+
 `Project.kt`
 ```kotlin
 fun Project.module(action: LibraryExtension.() -> Unit) {
@@ -195,7 +201,8 @@ fun Project.module(action: LibraryExtension.() -> Unit) {
 	}
 }
 ```
-`build.gradle.kts`
+
+`/build.gradle.kts`
 ```kotlin
 subprojects {
 	module {
@@ -211,7 +218,7 @@ subprojects {
 ```
 
 ###  任意の箇所でapplyしたいとき
-`app/build.gradle.kts`
+`/app/build.gradle.kts`
 ```kotlin
 plugins {
 	id("com.google.gms.google-services") apply false
@@ -221,7 +228,7 @@ apply(plugin = "com.google.gms.google-services")
 ```
 
 ### プラグインを共通化したい
-`build.gradle.kts`
+`/build.gradle.kts`
 ```kotlin
 subprojects {
 	if (project.name == "app") {

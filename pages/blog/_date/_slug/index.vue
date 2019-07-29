@@ -37,14 +37,7 @@ export default {
           content: 'sorrowblue.github.io'
         }
       ],
-      link: [
-        { rel: 'canonica', href: url },
-        {
-          rel: 'stylesheet',
-          href:
-            'http://raw.githubusercontent.com/yrgoldteeth/darkdowncss/raw/master/darkdown.css'
-        }
-      ]
+      link: [{ rel: 'canonica', href: url }]
     }
   }
 }
@@ -52,6 +45,7 @@ export default {
 
 <style>
 @import '@/assets/css/tomorrow-night.css';
+@import '@/assets/css/github-markdown.css';
 </style>
 
 <style>
