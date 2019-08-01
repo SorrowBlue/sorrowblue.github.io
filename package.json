@@ -12,7 +12,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "md": "processmd content/blog/**/*.md --summaryOutput static/content/blog/summary.json --outputDir static/content/blog/json"
+    "md": "processmd content/blog/**/*.md --summaryOutput static/content/blog/summary.json --outputDir static/content/blog/json --markdownOptions.html=true" 
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
