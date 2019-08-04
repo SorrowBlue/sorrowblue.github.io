@@ -39,6 +39,12 @@ export default {
         src: '/images/portfolio.webp',
         link: '/blog',
         desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Qiita API v2 test β',
+        src: '/images/qiita.webp',
+        link: '/qiita',
+        desc: 'Qiita API v2 個人使用試験用のテストページです。'
       }
     ]
   },

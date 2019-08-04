@@ -48,9 +48,17 @@ export default {
     '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/eslint-module'
   ],
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    proxy: true
+  },
+  proxy: {
+    '/api/': 'https://qiita.com/api/v2/'
+  },
   vuetify: {
     theme: {
       dark: true,
