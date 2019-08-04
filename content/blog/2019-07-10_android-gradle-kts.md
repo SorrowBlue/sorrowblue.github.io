@@ -4,68 +4,72 @@ desc: Android build.gradle.ktsのすゝめ
 date: 2019/07/10
 tags: Android Kotlin
 ---
-# Android: build.gradle.ktsのすゝめ
+
+# Android: build.gradle.kts のすゝめ
+
 [Github](https://github.com/SorrowBlue/AndroidGradleKts)
 [![Build Status](https://travis-ci.com/SorrowBlue/sorrowblue.github.io.svg?token=69SwqJzT2mqgmiiajAiQ&branch=gh-pages)](https://travis-ci.com/SorrowBlue/sorrowblue.github.io)
 
 ## 環境
 
-|tool|version|
-|:-------------------:|:----------:|
-|Gradle               |5.4.1       |
-|Kotlin               |1.3.41      |
-|Android Studio       |3.5 Beta 5  |
-|Android Gradle Plugin|3.5.0-beta05|
-
+|         tool          |   version    |
+| :-------------------: | :----------: |
+|        Gradle         |    5.4.1     |
+|        Kotlin         |    1.3.41    |
+|    Android Studio     |  3.5 Beta 5  |
+| Android Gradle Plugin | 3.5.0-beta05 |
 
 ## 既存のプロジェクトへの導入
 
 1. 設定の変更
-`ファイル - 設定 - 言語＆フレームワーク - Kotlin - Kotlinスクリプト`
-ファイル変更時にスクリプト依存関係を再ロードする にチェックする  
-![build_src](/images/android-gradle-kts/settings_kotlin-script_reload.webp)
+   `ファイル - 設定 - 言語＆フレームワーク - Kotlin - Kotlinスクリプト`
+   ファイル変更時にスクリプト依存関係を再ロードする にチェックする  
+   ![build_src](/images/android-gradle-kts/settings_kotlin-script_reload.webp)
 
-1. プロジェクトルートに `buildSrc` を作成  
-![build_src](/images/android-gradle-kts/build_src.webp)
+2. プロジェクトルートに `buildSrc` を作成  
+   ![build_src](/images/android-gradle-kts/build_src.webp)
 
-1. `buildSrc` に `build.gradle.kts` と `settings.gradle.kts` を作成  
-![build-settings-gradle-kts](/images/android-gradle-kts/build-settings-gradle-kts.webp)
+3. `buildSrc` に `build.gradle.kts` と `settings.gradle.kts` を作成  
+   ![build-settings-gradle-kts](/images/android-gradle-kts/build-settings-gradle-kts.webp)
 
-1. `build.gradle.kts` に記述
+4. `build.gradle.kts` に記述
 
-```kotlin
-plugins {
-    `kotlin-dsl`
-}
-repositories {
-    jcenter()
-    google()
-}
-dependencies {
-    implementation("com.android.tools.build:gradle:3.5.0-beta05")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
-}
-```
+   ```kotlin
+   plugins {
+     `kotlin-dsl`
+   }
+   repositories {
+         jcenter()
+         google()
+     }
+     dependencies {
+         implementation("com.android.tools.build:gradle:3.5.0-beta05")
+         implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.41")
+     }
+   ```
 
 5. Sync now(今すぐ同期)  
-![sync_now](/images/android-gradle-kts/sync_now.webp)
+   ![sync_now](/images/android-gradle-kts/sync_now.webp)
 
 6. プロジェクトルートの `settings.gradle` を `settings.gradle.kts` にリネーム  
-![settings-gradle-kts](/images/android-gradle-kts/settings-gradle-kts.webp)
+   ![settings-gradle-kts](/images/android-gradle-kts/settings-gradle-kts.webp)
 
 7. `settings.gradle.kts` を編集
+
 ```kotlin
 include(":app")
 rootProject.name = "My Application"
 ```
+
 8. プロジェクトルートの `build.gradle` を `build.gradle.kts` にリネーム
 
-9.  `build.gradle.kts` を編集
+9. `build.gradle.kts` を編集
+
 ```kotlin
 buildscript {
     repositories {
         google()
-        jcenter()        
+        jcenter()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.5.0-beta05")
@@ -76,7 +80,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-       
+
     }
 }
 task<Delete>("clean") { delete(rootProject.buildDir) }
@@ -120,14 +124,17 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 }
 ```
+
 12. Sync now(今すぐ同期)
 
 ## スマートに書く
-`getByName("release")` このあたりを拡張関数で記述する  
 
-`buildSrc/src/main/kotlin/Project.kt` を作成  
+`getByName("release")` このあたりを拡張関数で記述する
+
+`buildSrc/src/main/kotlin/Project.kt` を作成
 
 `Project.kt`
+
 ```kotlin
 import com.android.build.gradle.internal.dsl.BuildType
 import org.gradle.api.NamedDomainObjectContainer
@@ -137,6 +144,7 @@ fun NamedDomainObjectContainer<BuildType>.release(body: BuildType.() -> Unit) {
 ```
 
 `app/build.gradle.kts`
+
 ```kotlin
 release {
 	isMinifyEnabled = false
@@ -144,11 +152,12 @@ release {
 }
 ```
 
-
 ## 変数を定義
+
 もちろん変数も定義して使える
 
 `buildSrc/src/main/kotlin/Versions.kt`
+
 ```kotlin
 object Versions {
 	const val kotlin = "1.3.41"
@@ -162,6 +171,7 @@ object Versions {
 ```
 
 `buildSrc/src/main/kotlin/Deps.kt`
+
 ```kotlin
 object Deps {
 	const val `kotlin-stdlib-jdk7` = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
@@ -175,6 +185,7 @@ object Deps {
 ```
 
 `app/build.gradle.kts`
+
 ```kotlin
 dependencies {
     implementation(Deps.`kotlin-stdlib-jdk7`)
@@ -192,6 +203,7 @@ dependencies {
 ### 各モジュールの `minSdkVersion` `targetSdkVersion` などをまとめる
 
 `Project.kt`
+
 ```kotlin
 fun Project.module(action: LibraryExtension.() -> Unit) {
 	afterEvaluate {
@@ -203,6 +215,7 @@ fun Project.module(action: LibraryExtension.() -> Unit) {
 ```
 
 `/build.gradle.kts`
+
 ```kotlin
 subprojects {
 	module {
@@ -217,8 +230,10 @@ subprojects {
 }
 ```
 
-###  任意の箇所でapplyしたいとき
+### 任意の箇所で apply したいとき
+
 `/app/build.gradle.kts`
+
 ```kotlin
 plugins {
 	id("com.google.gms.google-services") apply false
@@ -228,7 +243,9 @@ apply(plugin = "com.google.gms.google-services")
 ```
 
 ### プラグインを共通化したい
+
 `/build.gradle.kts`
+
 ```kotlin
 subprojects {
 	if (project.name == "app") {

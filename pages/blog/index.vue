@@ -1,25 +1,26 @@
 <template>
   <v-container grid-list-md>
-    <v-layout column>
-      <v-flex v-for="data in datas" :key="data.title" xs12>
-        <v-card v-ripple :to="`/blog/${data.uri}/`">
-          <v-list-item :key="data.title">
-            <template>
-              <v-list-item-content>
-                <v-list-item-title v-text="data.title"></v-list-item-title>
-                <!-- prettier-ignore -->
-                <v-list-item-subtitle v-text="data.desc"></v-list-item-subtitle>
-              </v-list-item-content>
-              <v-list-item-action>
-                <!-- prettier-ignore -->
-                <v-list-item-action-text v-text="data.date"></v-list-item-action-text>
-              </v-list-item-action>
-            </template>
-          </v-list-item>
-          <!-- <v-card-title class="headline" v-text="data.title" />
-          <v-card-text v-text="data.date" />
-          <v-card-text v-text="data.desc" /> -->
-        </v-card>
+    <v-layout justify-center>
+      <v-flex xs12 sm11 md10 lg8>
+        <v-layout row wrap>
+          <v-flex v-for="data in datas" :key="data.title" xs12>
+            <v-card v-ripple :to="`/blog/${data.uri}/`">
+              <v-list-item :key="data.title">
+                <template>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="data.title"></v-list-item-title>
+                    <!-- prettier-ignore -->
+                    <v-list-item-subtitle v-text="data.desc"></v-list-item-subtitle>
+                  </v-list-item-content>
+                  <v-list-item-action>
+                    <!-- prettier-ignore -->
+                    <v-list-item-action-text v-text="data.date"></v-list-item-action-text>
+                  </v-list-item-action>
+                </template>
+              </v-list-item>
+            </v-card>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
   </v-container>

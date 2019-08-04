@@ -38,12 +38,12 @@ Markdown の段落は、1 行以上の空白行で区切ります。
 ## 改行
 
 ```md
-改行は、<br>を使うか、<br>
+改行は、<br />を使うか、<br />
 2 つ以上のスペースを使用します。
 改行しました。
 ```
 
-改行は [\<br>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/br) を使うか、<br>
+改行は [\<br />](https://developer.mozilla.org/ja/docs/Web/HTML/Element/br) を使うか、<br />
 2 つ以上のスペースを使用します。  
 改行しました。
 
@@ -207,7 +207,7 @@ Markdown は番号付きリストと番号なしリストをサポートして�
 
 ## 強調
 
-`*` アスタリスクか`_`アンダースコアを使用します。一つなら [\<em>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/em) 、２つなら [\<strong>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/strong) で囲むのと同等です。
+`*` アスタリスクか`_`アンダースコアを使用します。一つなら [\<em>\</em>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/em) 、２つなら [\<strong>\</strong>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/strong) で囲むのと同等です。
 
 ```md
 _The Emphasis element_
@@ -232,7 +232,7 @@ _The Emphasis element_
 `` print(`) ``
 ```
 
-`print()`
+`print()`  
 `` print(`) ``
 
 ---
@@ -240,7 +240,7 @@ _The Emphasis element_
 ## 水平線
 
 1 行に 3 つ以上の `-` ハイフンか `*` アスタリスク、`_` アンダースコアを使用するか、
-[\<hr>](https://developer.mozilla.org/ja/docs/Web/HTML/Element/hr)を使用します。
+[\<hr />](https://developer.mozilla.org/ja/docs/Web/HTML/Element/hr)を使用します。
 
 ```
 ---

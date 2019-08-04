@@ -12,12 +12,14 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "md": "processmd content/blog/**/*.md --summaryOutput static/content/blog/summary.json --outputDir static/content/blog/json --markdownOptions.html=true" 
+    "md": "processmd content/blog/**/*.md --summaryOutput static/content/blog/summary.json --outputDir static/content/blog/json --markdownOptions.html=true --markdownOptions.linkify=true"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/pwa": "^2.6.0",
-    "nuxt": "^2.8.1"
+    "node-sass": "^4.12.0",
+    "nuxt": "^2.8.1",
+    "sass-loader": "^7.1.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
