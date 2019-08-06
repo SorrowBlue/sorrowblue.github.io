@@ -17,13 +17,21 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-
-@Component({})
-class Homepage extends Vue {
-  get cards() {
-    return [
+<script>
+// import { Vue, Component } from 'vue-property-decorator'
+// import HomepageItems from '~/assets/data/HomepageItems'
+// @Component({})
+// class HomeVue extends Vue {
+// get cards(): Array<HomepageItem> {
+// return HomepageItems
+// }
+// isInternal(path: string): boolean {
+// return !/^https?:\/\//.test(path)
+// }
+// }
+export default {
+  computed: {
+    cards: () => [
       {
         title: 'Mymetable',
         src: '/images/mymetable.webp',
@@ -49,11 +57,9 @@ class Homepage extends Vue {
         desc: 'Qiita API v2 個人使用試験用のテストページです。'
       }
     ]
-  }
-
-  isInternal(path) {
-    return !/^https?:\/\//.test(path)
+  },
+  methods: {
+    isInternal: path => !/^https?:\/\//.test(path)
   }
 }
-export default Homepage
 </script>
