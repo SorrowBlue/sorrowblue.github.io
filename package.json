@@ -5,7 +5,7 @@
   "author": "SorrowBlue",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "eslint --ext .ts.js,.vue --ignore-path .gitignore .",
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
     "dev": "nuxt",
@@ -28,8 +28,10 @@
     "@fortawesome/fontawesome-free": "^5.10.1",
     "@nuxt/typescript": "^2.8.1",
     "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^0.2.1",
-    "@nuxtjs/vuetify": "^1.0.1",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/vuetify": "^1.2.1",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
     "babel-eslint": "^10.0.2",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
@@ -38,6 +40,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "json-loader": "^0.5.7",
     "nodemon": "^1.19.1",
+    "npm-check-updates": "^3.1.20",
     "prettier": "^1.18.2",
     "processmd": "^4.4.2"
   }

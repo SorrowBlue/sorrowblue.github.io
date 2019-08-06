@@ -74,17 +74,18 @@ const scope = 'read_qiita'
 @Component
 class UserBoard extends Vue {
   @Prop({ default: null })
-  authUser: AuthUser | undefined
+  authUser!: AuthUser
 
   @Prop({ default: '' })
   clientStat: string = 'BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN'
 
   @Prop({ default: null })
-  tags: Array<Tag> | undefined
+  tags!: Array<Tag>
 
   showTag = false
 
   shouldDisplayHint = sessionStorage.getItem('QiitaAuthHint') !== 'false'
+
   changeHint() {
     this.shouldDisplayHint = !this.shouldDisplayHint
     sessionStorage.setItem('QiitaAuthHint', `${this.shouldDisplayHint}`)
