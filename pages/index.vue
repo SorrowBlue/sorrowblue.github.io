@@ -21,7 +21,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import HomepageItem from '~/assets/ts/item/HomepageItem'
 import HomepageItems from '~/assets/data/HomepageItems'
-@Component
+@Component({})
 class HomeVue extends Vue {
   get cards(): Array<HomepageItem> {
     return HomepageItems

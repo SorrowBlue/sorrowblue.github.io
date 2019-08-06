@@ -4,11 +4,7 @@ import { sourceFileArray } from './static/content/blog/summary.json'
 const config: NuxtConfiguration = {
   mode: 'spa',
   generate: {
-    routes: function() {
-      return sourceFileArray.map(sourceFileName => sourceFileNameToUrl(sourceFileName))
-    }
-    // routes: callback =>
-      // callback(sourceFileArray.map(sourceFileName => sourceFileNameToUrl(sourceFileName)))
+    routes: () => sourceFileArray.map(sourceFileName => sourceFileNameToUrl(sourceFileName))
   },
   /*
    ** Headers of the page
