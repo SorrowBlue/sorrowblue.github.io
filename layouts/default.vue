@@ -27,9 +27,9 @@
 
 <script lang="ts">
 import { Vue } from 'vue-property-decorator'
-import Item from '~/assets/js/Item'
+import { Item } from '~/assets/js/Item'
 
-export default class AppAAA extends Vue {
+export default class App extends Vue {
   title: String = 'sorrowblue.github.io'
   globals: Array<Item> = [{ title: 'Blog', link: '/blog' }, { title: 'Android', link: '/android' }, { title: 'Portfolio', link: '/portfolio' }]
 }
