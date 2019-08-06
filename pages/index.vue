@@ -20,39 +20,37 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 
-@Component({
-  computed: {
-    cards() {
-      return [
-        {
-          title: 'Mymetable',
-          src: '/images/mymetable.webp',
-          link: 'https://mymetableapp.sorrowblue.com/',
-          desc: '時間割を管理するアプリです。'
-        },
-        {
-          title: 'Blog',
-          src: '/images/blog.webp',
-          link: '/blog',
-          desc: 'ブログです'
-        },
-        {
-          title: 'Portfolio',
-          src: '/images/portfolio.webp',
-          link: '/blog',
-          desc: 'ポートフォリオです'
-        },
-        {
-          title: 'Qiita API v2 test β',
-          src: '/images/qiita.webp',
-          link: '/qiita_api_v2',
-          desc: 'Qiita API v2 個人使用試験用のテストページです。'
-        }
-      ]
-    }
-  }
-})
+@Component({})
 class Homepage extends Vue {
+  get cards() {
+    return [
+      {
+        title: 'Mymetable',
+        src: '/images/mymetable.webp',
+        link: 'https://mymetableapp.sorrowblue.com/',
+        desc: '時間割を管理するアプリです。'
+      },
+      {
+        title: 'Blog',
+        src: '/images/blog.webp',
+        link: '/blog',
+        desc: 'ブログです'
+      },
+      {
+        title: 'Portfolio',
+        src: '/images/portfolio.webp',
+        link: '/blog',
+        desc: 'ポートフォリオです'
+      },
+      {
+        title: 'Qiita API v2 test β',
+        src: '/images/qiita.webp',
+        link: '/qiita_api_v2',
+        desc: 'Qiita API v2 個人使用試験用のテストページです。'
+      }
+    ]
+  }
+
   isInternal(path) {
     return !/^https?:\/\//.test(path)
   }
