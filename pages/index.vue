@@ -17,49 +17,45 @@
   </v-container>
 </template>
 
-<script>
-// import { Vue, Component } from 'vue-property-decorator'
-// import HomepageItems from '~/assets/data/HomepageItems'
-// @Component({})
-// class HomeVue extends Vue {
-// get cards(): Array<HomepageItem> {
-// return HomepageItems
-// }
-// isInternal(path: string): boolean {
-// return !/^https?:\/\//.test(path)
-// }
-// }
-export default {
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({
   computed: {
-    cards: () => [
-      {
-        title: 'Mymetable',
-        src: '/images/mymetable.webp',
-        link: 'https://mymetableapp.sorrowblue.com/',
-        desc: '時間割を管理するアプリです。'
-      },
-      {
-        title: 'Blog',
-        src: '/images/blog.webp',
-        link: '/blog',
-        desc: 'ブログです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Qiita API v2 test β',
-        src: '/images/qiita.webp',
-        link: '/qiita_api_v2',
-        desc: 'Qiita API v2 個人使用試験用のテストページです。'
-      }
-    ]
-  },
-  methods: {
-    isInternal: path => !/^https?:\/\//.test(path)
+    cards() {
+      return [
+        {
+          title: 'Mymetable',
+          src: '/images/mymetable.webp',
+          link: 'https://mymetableapp.sorrowblue.com/',
+          desc: '時間割を管理するアプリです。'
+        },
+        {
+          title: 'Blog',
+          src: '/images/blog.webp',
+          link: '/blog',
+          desc: 'ブログです'
+        },
+        {
+          title: 'Portfolio',
+          src: '/images/portfolio.webp',
+          link: '/blog',
+          desc: 'ポートフォリオです'
+        },
+        {
+          title: 'Qiita API v2 test β',
+          src: '/images/qiita.webp',
+          link: '/qiita_api_v2',
+          desc: 'Qiita API v2 個人使用試験用のテストページです。'
+        }
+      ]
+    }
+  }
+})
+class Homepage extends Vue {
+  isInternal(path) {
+    return !/^https?:\/\//.test(path)
   }
 }
+export default Homepage
 </script>
