@@ -1,12 +1,12 @@
-import sourceFileNameToUrl from './assets/js/sourceFileNameToUri.js'
+import NuxtConfiguration from '@nuxt/config'
+import sourceFileNameToUrl from './assets/js/sourceFileNameToUri'
 import { sourceFileArray } from './static/content/blog/summary.json'
-
-export default {
+const config: NuxtConfiguration = {
   mode: 'spa',
   generate: {
     routes: callback =>
       callback(
-        null,
+        Error(),
         sourceFileArray.map(sourceFileName =>
           sourceFileNameToUrl(sourceFileName)
         )
@@ -40,20 +40,20 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/vuetify.ts'
+  ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     '@nuxtjs/vuetify',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/eslint-module'
   ],
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
     proxy: true
   },
   proxy: {
@@ -78,16 +78,17 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
+    // extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    }
+      // if (ctx.isDev && ctx.isClient) {
+        // config.module.rules.push({
+          // enforce: 'pre',
+          // test: /\.(js|vue)$/,
+          // loader: 'eslint-loader',
+          // exclude: /(node_modules)/
+        // })
+      // }
+    // }
   }
 }
+export default config

@@ -109,15 +109,7 @@ export default {
   hr {
     margin: 32px 0;
     border-width: 0 0 1px;
-    border-image: linear-gradient(
-        90deg,
-        hsla(0, 0%, 100%, 0.5),
-        hsla(0, 0%, 100%, 0) 25%,
-        hsla(0, 0%, 100%, 0.5) 50%,
-        hsla(0, 0%, 100%, 0) 75%,
-        hsla(0, 0%, 100%, 0.5) 100%
-      )
-      0 0 100%;
+    border-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0.5), hsla(0, 0%, 100%, 0) 25%, hsla(0, 0%, 100%, 0.5) 50%, hsla(0, 0%, 100%, 0) 75%, hsla(0, 0%, 100%, 0.5) 100%) 0 0 100%;
     border-style: solid;
   }
 

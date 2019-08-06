@@ -20,9 +20,13 @@
     "@nuxtjs/pwa": "^2.6.0",
     "node-sass": "^4.12.0",
     "nuxt": "^2.8.1",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "ts-node": "^8.3.0",
+    "vue-property-decorator": "^8.2.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "@nuxt/typescript": "^2.8.1",
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^0.2.1",
     "@nuxtjs/vuetify": "^1.0.1",

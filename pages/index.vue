@@ -4,8 +4,7 @@
       <v-flex column justify-center xs12 md11 lg10>
         <v-layout grid-list-md row wrap align-start justify-start>
           <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
-            <!-- prettier-ignore -->
-            <v-card :to="convertLink(card.link, true)" :href="convertLink(card.link, false)">
+            <v-card :to="isInternal(card.link) ? card.link : ''" :href="isInternal(card.link) ? '' : card.link">
               <v-img :src="card.src" :aspect-ratio="16 / 9">
                 <v-card-title class="align-end fill-height" v-text="card.title" />
               </v-img>
@@ -18,39 +17,18 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  computed: {
-    cards: () => [
-      {
-        title: 'Mymetable',
-        src: '/images/mymetable.webp',
-        link: 'https://mymetableapp.sorrowblue.com/',
-        desc: '時間割を管理するアプリです。'
-      },
-      {
-        title: 'Blog',
-        src: '/images/blog.webp',
-        link: '/blog',
-        desc: 'ブログです'
-      },
-      {
-        title: 'Portfolio',
-        src: '/images/portfolio.webp',
-        link: '/blog',
-        desc: 'ポートフォリオです'
-      },
-      {
-        title: 'Qiita API v2 test β',
-        src: '/images/qiita.webp',
-        link: '/qiita',
-        desc: 'Qiita API v2 個人使用試験用のテストページです。'
-      }
-    ]
-  },
-  methods: {
-    convertLink: (path, isInternal) =>
-      !/^https?:\/\//.test(path) && isInternal ? path : ''
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import HomepageItem from '~/assets/ts/item/HomepageItem'
+import HomepageItems from '~/assets/data/HomepageItems'
+@Component
+class HomeVue extends Vue {
+  get cards(): Array<HomepageItem> {
+    return HomepageItems
+  }
+  isInternal(path: string): boolean {
+    return !/^https?:\/\//.test(path)
   }
 }
+export default HomeVue
 </script>

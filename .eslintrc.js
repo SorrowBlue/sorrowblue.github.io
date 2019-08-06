@@ -17,6 +17,8 @@ module.exports = {
     'plugin:nuxt/recommended',
   ],
   rules: {
+    semi: 'off',
+    'max-len': ["error", { "code": 200 }],
     'arrow-parens': 'off',
     'vue/html-self-closing': 'off',
     'space-before-function-paren': 'off',
