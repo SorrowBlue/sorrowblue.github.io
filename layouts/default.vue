@@ -25,12 +25,12 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    title: 'sorrowblue.github.io',
-    globals: [{ title: 'Blog', link: '/blog' }, { title: 'Android', link: '/android' }, { title: 'Portfolio', link: '/portfolio' }]
-  })
+<script lang="ts">
+import { Vue } from 'vue-property-decorator'
+
+export default class App extends Vue {
+  title: String = 'sorrowblue.github.io'
+  globals = [{ title: 'Blog', link: '/blog' }, { title: 'Android', link: '/android' }, { title: 'Portfolio', link: '/portfolio' }]
 }
 </script>
 
