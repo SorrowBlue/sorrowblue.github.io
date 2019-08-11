@@ -3,14 +3,22 @@
     <v-layout column wrap text-center justify-center>
       <v-flex xs1 mt-5>
         <v-layout row justify-center class="text-xs-center">
-          <v-flex xs2 sm1 class="display-4 fuwafuwa4">4</v-flex>
-          <v-flex xs2 sm1 class="display-4 fuwafuwa0">0</v-flex>
-          <v-flex xs2 sm1 class="display-4 fuwafuwa4">4</v-flex>
+          <v-flex xs2 sm1 class="display-4 fuwafuwa4">
+            4
+          </v-flex>
+          <v-flex xs2 sm1 class="display-4 fuwafuwa0">
+            0
+          </v-flex>
+          <v-flex xs2 sm1 class="display-4 fuwafuwa4">
+            4
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs1>
         <v-layout justify-center>
-          <p class="display-1">Not found page.</p>
+          <p class="display-1">
+            Not found page.
+          </p>
         </v-layout>
       </v-flex>
     </v-layout>

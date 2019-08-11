@@ -8,13 +8,13 @@
               <v-list-item :key="data.title">
                 <template>
                   <v-list-item-content>
-                    <v-list-item-title v-text="data.title"></v-list-item-title>
+                    <v-list-item-title v-text="data.title" />
                     <!-- prettier-ignore -->
-                    <v-list-item-subtitle v-text="data.desc"></v-list-item-subtitle>
+                    <v-list-item-subtitle v-text="data.desc" />
                   </v-list-item-content>
                   <v-list-item-action>
                     <!-- prettier-ignore -->
-                    <v-list-item-action-text v-text="data.date"></v-list-item-action-text>
+                    <v-list-item-action-text v-text="data.date" />
                   </v-list-item-action>
                 </template>
               </v-list-item>

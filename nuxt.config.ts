@@ -21,7 +21,8 @@ const config: NuxtConfiguration = {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' }]
   },
   /*
    ** Customize the progress-bar color
@@ -35,7 +36,9 @@ const config: NuxtConfiguration = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/vuetify.ts'
+    '~/plugins/vuetify.ts',
+    '~/plugins/axios.ts',
+    '~/plugins/qiita-api.client.ts'
   ],
   /*
    ** Nuxt.js modules
@@ -51,7 +54,7 @@ const config: NuxtConfiguration = {
     proxy: true
   },
   proxy: {
-    '/api/': 'https://qiita.com/api/v2/'
+    '/qiita_api/': 'https://qiita.com/api/v2/'
   },
   vuetify: {
     theme: {

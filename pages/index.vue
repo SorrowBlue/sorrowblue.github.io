@@ -18,17 +18,6 @@
 </template>
 
 <script>
-// import { Vue, Component } from 'vue-property-decorator'
-// import HomepageItems from '~/assets/data/HomepageItems'
-// @Component({})
-// class HomeVue extends Vue {
-// get cards(): Array<HomepageItem> {
-// return HomepageItems
-// }
-// isInternal(path: string): boolean {
-// return !/^https?:\/\//.test(path)
-// }
-// }
 export default {
   computed: {
     cards: () => [
@@ -53,7 +42,7 @@ export default {
       {
         title: 'Qiita API v2 test β',
         src: '/images/qiita.webp',
-        link: '/qiita_api_v2',
+        link: '/qiita',
         desc: 'Qiita API v2 個人使用試験用のテストページです。'
       }
     ]

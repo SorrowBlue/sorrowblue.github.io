@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-layout column align-center>
           <v-flex>
-            <v-pagination v-model="page" circle :length="100" :page="page" :total-visible="6"></v-pagination>
+            <v-pagination v-model="page" circle :length="100" :page="page" :total-visible="6" />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -13,16 +13,16 @@
           <template v-for="(data, index) in datas">
             <v-list-item :key="data.id" ripple :to="`/qiita_api_v2/tags/${data.id}`">
               <v-list-item-avatar>
-                <v-img v-if="data.icon_url != null" :src="data.icon_url"></v-img>
+                <v-img v-if="data.icon_url != null" :src="data.icon_url" />
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title v-text="data.id"></v-list-item-title>
+                <v-list-item-title v-text="data.id" />
               </v-list-item-content>
               <v-list-item-action>
-                <v-list-item-action-text v-text="data.items_count + ' notes'"></v-list-item-action-text>
+                <v-list-item-action-text v-text="data.items_count + ' notes'" />
               </v-list-item-action>
             </v-list-item>
-            <v-divider v-if="index + 1 < datas.length" :key="index"></v-divider>
+            <v-divider v-if="index + 1 < datas.length" :key="index" />
           </template>
         </v-list>
       </v-flex>

@@ -22,6 +22,7 @@
     ],
     "eslint.autoFixOnSave": false,
     "eslint.alwaysShowStatus": true,
-    "prettier.eslintIntegration": true
+    "prettier.eslintIntegration": true,
+    "typescript.tsdk": "node_modules\\typescript\\lib"
   }
 }

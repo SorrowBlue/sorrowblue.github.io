@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout row justify-center>
-      <v-flex class="markdown" xs12 sm11 md10 lg8 v-html="bodyHtml"></v-flex>
+      <v-flex class="markdown" xs12 sm11 md10 lg8 v-html="bodyHtml" />
     </v-layout>
   </v-container>
 </template>

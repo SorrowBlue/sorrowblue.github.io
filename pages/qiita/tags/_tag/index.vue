@@ -4,11 +4,11 @@
       <v-flex xs12>
         <v-layout column align-center>
           <v-flex>
-            <v-chip v-if="pages[0] != 1" :to="`/qiita_api_v2/tags/${tag}?page=${page - 1}`" ripple v-text="'<'"></v-chip>
+            <v-chip v-if="pages[0] != 1" :to="`/qiita_api_v2/tags/${tag}?page=${page - 1}`" ripple v-text="'<'" />
             <template v-for="i in pages">
-              <v-chip :key="i" ripple :disabled="page == i" :to="`/qiita_api_v2/tags/${tag}?page=${i}`" v-text="i + ''"></v-chip>
+              <v-chip :key="i" ripple :disabled="page == i" :to="`/qiita_api_v2/tags/${tag}?page=${i}`" v-text="i + ''" />
             </template>
-            <v-chip v-if="pages[4] != 100" :to="`/qiita_api_v2/tags/${tag}?page=${page + 1}`" ripple v-text="'>'"></v-chip>
+            <v-chip v-if="pages[4] != 100" :to="`/qiita_api_v2/tags/${tag}?page=${page + 1}`" ripple v-text="'>'" />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -16,19 +16,19 @@
         <v-layout row wrap>
           <v-flex xs12>
             <v-list>
-              <v-subheader v-text="tag"></v-subheader>
+              <v-subheader v-text="tag" />
               <template v-for="(item, index) in items">
-                <v-divider v-if="index < items.length" :key="index"></v-divider>
+                <v-divider v-if="index < items.length" :key="index" />
                 <v-list-item :key="item.title" ripple>
                   <v-list-item-avatar>
-                    <v-img :src="item.user.profile_image_url"></v-img>
+                    <v-img :src="item.user.profile_image_url" />
                   </v-list-item-avatar>
                   <v-list-item-content>
-                    <v-list-item-title v-text="item.title"></v-list-item-title>
-                    <v-list-item-subtitle v-html="`Posted by ${item.user.name}`"></v-list-item-subtitle>
+                    <v-list-item-title v-text="item.title" />
+                    <v-list-item-subtitle v-html="`Posted by ${item.user.name}`" />
                   </v-list-item-content>
                   <v-list-item-action>
-                    <v-list-item-action-text v-text="item.time_lag + ' update'"></v-list-item-action-text>
+                    <v-list-item-action-text v-text="item.time_lag + ' update'" />
                   </v-list-item-action>
                 </v-list-item>
               </template>
