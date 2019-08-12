@@ -29,11 +29,7 @@
 import { Vue, Prop, Component, Watch } from 'vue-property-decorator'
 import Item from '@/plugins/qiita/Item'
 
-@Component({
-  mounted() {
-    this.$nuxt.$on('qiitaQuery', this.queryChange)
-  }
-})
+@Component
 class ItemList extends Vue {
   items: Array<Item | null> = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
 
@@ -56,6 +52,10 @@ class ItemList extends Vue {
         v.user.profile_image_url = 'https://pbs.twimg.com/profile_images/1124774641782837249/J59RKpBu_normal.jpg'
       }
     })
+  }
+
+  created() {
+    this.$nuxt.$on('qiitaQuery', this.queryChange)
   }
 
   async queryChange(query: string) {

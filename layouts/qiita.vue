@@ -5,7 +5,7 @@
         <v-toolbar-title v-text="title" />
       </router-link>
       <v-spacer />
-      <v-text-field v-model="query" hide-details prepend-icon="search" single-line />
+      <v-text-field v-model="query" hide-details prepend-icon="search" single-line @keyup.native.enter="submit" />
       <v-spacer />
       <v-menu offset-y :close-on-content-click="false">
         <template v-slot:activator="{ on }">
@@ -99,6 +99,7 @@ export default class Qiita extends Vue {
   show = false
   title = 'Qiita'
   showTag = false
+  query = 'test'
   globals = [{ title: 'Blog', link: '/blog' }, { title: 'Android', link: '/android' }, { title: 'Portfolio', link: '/portfolio' }]
 
   twitter(authUser: AuthUser) {
@@ -106,6 +107,10 @@ export default class Qiita extends Vue {
   }
   github(authUser: AuthUser) {
     location.href = `https://github.com/${authUser.github_login_name}`
+  }
+
+  submit() {
+    this.$nuxt.$emit('qiitaQuery', this.query)
   }
 
   authorize() {

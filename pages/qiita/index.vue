@@ -37,14 +37,12 @@ import { AxiosError } from 'axios'
 import { Vue, Component } from 'vue-property-decorator'
 import AuthUser from '../../assets/qiita_api/AuthUser'
 import Tag from '../../assets/qiita_api/Tag'
-import userBoard from '~/components/qiita_api_user-board.vue'
 import ItemList from '@/components/qiita/item-list.vue'
 import { QiitaApi } from '~/plugins/qiita-api.client'
 
 @Component({
   layout: 'qiita',
   components: {
-    'user-board': userBoard,
     'item-list': ItemList
   },
   async asyncData({ app, query }) {
