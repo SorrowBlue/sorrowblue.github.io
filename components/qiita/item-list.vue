@@ -3,8 +3,8 @@
     <template v-for="(item, i) in items">
       <v-list-item :key="item ? item.id : i" two-line>
         <v-list-item-avatar>
-          <v-img v-if="item" :src="item.user.profile_image_url" @on:error="change(item.id)" />
-          <v-icon v-else v-text="'mdi-photo'" />
+          <v-img v-if="item && item.user.profile_image_url != ''" :src="item.user.profile_image_url" @on:error="change(item.id)" />
+          <v-icon v-else size="48" v-text="'mdi-account-circle'" />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>
@@ -31,47 +31,18 @@ import Item from '@/plugins/qiita/Item'
 
 @Component
 class ItemList extends Vue {
-  items: Array<Item | null> = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+  @Prop()
+  items!: Array<Item>
 
-  @Prop({ default: 1 })
-  page!: number
-
-  @Prop({ default: 20 })
-  prePage!: number
-
-  @Prop({ default: undefined })
-  query!: string
-
-  @Watch('page', { immediate: true })
-  pageChanged() {
-    this.requestItems()
-  }
   change(id: string) {
-    ;(this.items as Array<Item>).forEach(v => {
+    this.items.some((v, i, a) => {
       if (v.id === id) {
-        v.user.profile_image_url = 'https://pbs.twimg.com/profile_images/1124774641782837249/J59RKpBu_normal.jpg'
+        v.user.profile_image_url = ''
+        return true
+      } else {
+        return false
       }
     })
-  }
-
-  created() {
-    this.$nuxt.$on('qiitaQuery', this.queryChange)
-  }
-
-  async queryChange(query: string) {
-    const items: Array<Item> = await this.$qiitaApi.requestItems(this.page, this.prePage, query)
-    this.items = items
-  }
-
-  async requestItems() {
-    this.$router.replace({
-      path: this.$route.path,
-      params: {
-        page: `${this.page}`
-      }
-    })
-    const items: Array<Item> = await this.$qiitaApi.requestItems(this.page, this.prePage, '')
-    this.items = items
   }
 }
 
