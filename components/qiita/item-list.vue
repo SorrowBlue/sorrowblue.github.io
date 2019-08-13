@@ -32,7 +32,7 @@ import Item from '@/plugins/qiita/Item'
 @Component
 class ItemList extends Vue {
   @Prop()
-  items!: Array<Item>
+  items!: Item[]
 
   change(id: string) {
     this.items.some((v, i, a) => {

@@ -99,7 +99,7 @@ export default class Qiita extends Vue {
   show = false
   title = 'Qiita'
   showTag = false
-  query = 'test'
+  query = ''
   globals = [{ title: 'Blog', link: '/blog' }, { title: 'Android', link: '/android' }, { title: 'Portfolio', link: '/portfolio' }]
 
   twitter(authUser: AuthUser) {
