@@ -1,5 +1,6 @@
 <template>
   <v-layout row justify-center>
+    <div>kousinndekita?</div>
     <v-progress-linear :active="loading" indeterminate />
     <v-flex
       v-for="i in $vuetify.breakpoint.xs || $vuetify.breakpoint.sm ? 1 : $vuetify.breakpoint.md ? 2 : 3"
