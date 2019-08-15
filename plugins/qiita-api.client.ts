@@ -109,12 +109,7 @@ export class QiitaApi {
   }
   
   async isItemLike(itemId: string): Promise<Boolean> {
-    this.$axios.onRequest(config => {
-      if(this.token != null) {
-          config.headers.common['Authorization'] = `Bearer ${this.token}`
-      }
-      return config
-  })
+    return false
     return await this.$axios.$get(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
   }
 

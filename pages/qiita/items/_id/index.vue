@@ -1,8 +1,37 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="2" lg="1" xl="1" order="1" order-md="1" class="shrink" justify="end">
+      <v-col cols="12" md="2" lg="1" class="shrink" justify="end">
         <v-row justify="center" align="center">
+          <v-col cols="auto" md="12">
+            <v-menu offset-y :close-on-content-click="false">
+              <template v-slot:activator="{ on }">
+                <v-avatar v-ripple size="48" color="red" v-on="on">
+                  <v-img :src="item.user.profile_image_url" alt="alt" />
+                </v-avatar>
+              </template>
+              <v-card max-width="80vw">
+                <v-list>
+                  <v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.user.name" />
+                      <v-list-item-subtitle v-text="`@${item.user.id}`" />
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-icon v-if="item.user.twitter_screen_name" @click="twitter" v-text="'fab fa-twitter-square'" />
+                      <v-icon v-if="item.user.github_login_name" @click="github" v-text="'fab fa-github-square'" />
+                    </v-list-item-action>
+                  </v-list-item>
+                  <v-divider />
+                  <v-list-item v-if="item.user.description">
+                    <v-list-item-content>
+                      <v-list-item-subtitle v-text="item.user.description" />
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </v-menu>
+          </v-col>
           <v-col cols="auto" md="12">
             <v-btn outlined :color="isLike ? 'primary' : 'white'" @click="switchLike">
               <v-icon left v-text="'mdi-thumb-up'" />
@@ -27,18 +56,10 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" md="8" lg="9" xl="9" order="3" order-md="2">
+      <v-col cols="12" md="10" lg="11">
         <v-card class="pa-3">
           <v-card-title primary-title v-text="item.title" />
-          <div class="markdown" v-html="item.rendered_body" />
-        </v-card>
-      </v-col>
-      <v-col cols="12" md="2" lg="2" xl="2" order="2" order-md="3">
-        <v-card class="pa-3">
-          <v-avatar size="48" color="red">
-            <v-img :src="item.user.profile_image_url" alt="alt" />
-          </v-avatar>
-          <v-card-title primary-title v-text="item.user.name" />
+          <v-card-text class="markdown" v-html="item.rendered_body" />
         </v-card>
       </v-col>
     </v-row>
@@ -56,6 +77,7 @@ import Item from '@/plugins/qiita/Item'
     const qiitaApi: QiitaApi = app.$qiitaApi
     const item = await qiitaApi.requestItem(params.id + '')
     return {
+      authUser: item.user,
       item,
       isLike: await qiitaApi.isItemLike(item.id)
     }
@@ -75,6 +97,13 @@ class ItemIndex extends Vue {
       this.isLike = true
       this.item.likes_count++
     }
+  }
+
+  twitter() {
+    location.href = `https://twitter.com/${this.item.user.twitter_screen_name}`
+  }
+  github() {
+    location.href = `https://github.com/${this.item.user.github_login_name}`
   }
 }
 
