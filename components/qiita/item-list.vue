@@ -1,7 +1,7 @@
 <template>
   <v-list>
     <template v-for="(item, i) in items">
-      <v-list-item :key="item ? item.id : i" two-line>
+      <v-list-item :key="item ? item.id : i" ripple two-line :to="`/qiita/items/${item.id}/`">
         <v-list-item-avatar>
           <v-img v-if="item && item.user.profile_image_url != ''" :src="item.user.profile_image_url" @on:error="change(item.id)" />
           <v-icon v-else size="48" v-text="'mdi-account-circle'" />
