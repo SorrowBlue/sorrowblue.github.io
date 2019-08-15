@@ -100,6 +100,23 @@ export class QiitaApi {
   async requestItemLikes(itemId: string): Promise<Array<Like>> {
     return await this.$axios.$get(`https://qiita.com/api/v2/items/${itemId}/likes`, this.config)
   }
+  async requestPutLike(itemId: string) {
+    this.$axios.$put(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
+  }
+
+  async requestDeleteLike(itemId: string) {
+    this.$axios.$delete(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
+  }
+  
+  async isItemLike(itemId: string): Promise<Boolean> {
+    this.$axios.onRequest(config => {
+      if(this.token != null) {
+          config.headers.common['Authorization'] = `Bearer ${this.token}`
+      }
+      return config
+  })
+    return await this.$axios.$get(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
+  }
 
   private get config(): AxiosRequestConfig {
     const config: AxiosRequestConfig = {}

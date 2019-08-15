@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" md="2" lg="1" xl="1" class="shrink" justify="end">
+      <v-col cols="12" md="2" lg="1" xl="1" order="1" order-md="1" class="shrink" justify="end">
         <v-row justify="center" align="center">
           <v-col cols="auto" md="12">
-            <v-btn outlined>
+            <v-btn outlined :color="isLike ? 'primary' : 'white'" @click="switchLike">
               <v-icon left v-text="'mdi-thumb-up'" />
               {{ item.likes_count }}
             </v-btn>
@@ -27,10 +27,18 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="12" md="10" lg="10" xl="10">
+      <v-col cols="12" md="8" lg="9" xl="9" order="3" order-md="2">
         <v-card class="pa-3">
           <v-card-title primary-title v-text="item.title" />
           <div class="markdown" v-html="item.rendered_body" />
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="2" lg="2" xl="2" order="2" order-md="3">
+        <v-card class="pa-3">
+          <v-avatar size="48" color="red">
+            <v-img :src="item.user.profile_image_url" alt="alt" />
+          </v-avatar>
+          <v-card-title primary-title v-text="item.user.name" />
         </v-card>
       </v-col>
     </v-row>
@@ -40,30 +48,37 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { QiitaApi } from '@/plugins/qiita-api.client'
+import Item from '@/plugins/qiita/Item'
 
 @Component({
   layout: 'qiita',
   async asyncData({ params, app }) {
     const qiitaApi: QiitaApi = app.$qiitaApi
+    const item = await qiitaApi.requestItem(params.id + '')
     return {
-      item: await qiitaApi.requestItem(params.id + '')
+      item,
+      isLike: await qiitaApi.isItemLike(item.id)
     }
   }
 })
-class Item extends Vue {
-  actions = [
-    {
-      icon: 'mdi-thumb-up',
-      prop: 'likes_count'
-    },
-    {
-      icon: 'mdi-chat',
-      prop: 'comments_count'
+class ItemIndex extends Vue {
+  item!: Item
+  isLike!: Boolean
+
+  switchLike() {
+    if (this.isLike) {
+      this.$qiitaApi.requestDeleteLike(this.item.id)
+      this.isLike = false
+      this.item.likes_count--
+    } else {
+      this.$qiitaApi.requestPutLike(this.item.id)
+      this.isLike = true
+      this.item.likes_count++
     }
-  ]
+  }
 }
 
-export default Item
+export default ItemIndex
 </script>
 
 <style lang="scss">
