@@ -45,12 +45,23 @@
             </v-btn>
           </v-col>
           <v-col cols="auto" md="12">
-            <v-btn v-ripple small fab color="white">
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <v-btn small :outlined="!isStock" :color="isStock ? 'primary' : 'white'" fab @click="switchStock" v-on="on">
+                  <v-icon v-text="isStock ? 'mdi-folder-open' : 'mdi-folder'" />
+                </v-btn>
+              </template>
+              <span v-if="isStock">ストックから外します</span>
+              <span v-else>ストックします</span>
+            </v-tooltip>
+          </v-col>
+          <v-col cols="auto" md="12">
+            <v-btn small fab color="white">
               <v-icon color="black" @click="twitter(authUser)" v-text="'fab fa-twitter'" />
             </v-btn>
           </v-col>
           <v-col cols="auto" md="12">
-            <v-btn v-ripple small fab color="white">
+            <v-btn small fab color="white">
               <v-icon color="black" @click="github(authUser)" v-text="'fab fa-github'" />
             </v-btn>
           </v-col>
@@ -58,9 +69,41 @@
       </v-col>
       <v-col cols="12" md="10" lg="11">
         <v-card class="pa-3">
-          <v-card-title primary-title v-text="item.title" />
-          <v-card-text class="markdown" v-html="item.rendered_body" />
+          <v-card-title class="display-1" primary-title v-text="item.title" />
+          <v-card-text>
+            <div class="markdown" v-html="item.rendered_body" />
+          </v-card-text>
         </v-card>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn left small color="info" :href="`https://qiita.com/${item.user.name}/items/${item.id}/edit`">
+          <v-icon left v-text="'mdi-chat'" />
+          編集リクエスト
+        </v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn :outlined="!isLike" small :color="isLike ? 'green' : 'white'" @click="switchLike" v-on="on">
+              <v-icon left v-text="'mdi-thumb-up'" />
+              {{ item.likes_count }}
+            </v-btn>
+          </template>
+          <span v-if="isLike">いいねを外します</span>
+          <span v-else>いいね</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="auto">
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn small :outlined="!isStock" :color="isStock ? 'primary' : 'white'" @click="switchStock" v-on="on">
+              <v-icon left v-text="isStock ? 'mdi-folder-open' : 'mdi-folder'" />
+              ストック
+            </v-btn>
+          </template>
+          <span v-if="isStock">ストックから外します</span>
+          <span v-else>ストックします</span>
+        </v-tooltip>
       </v-col>
     </v-row>
   </v-container>
@@ -79,6 +122,7 @@ import Item from '@/plugins/qiita/Item'
     return {
       authUser: item.user,
       item,
+      isStock: false,
       isLike: await qiitaApi.isItemLike(item.id)
     }
   }
@@ -86,6 +130,16 @@ import Item from '@/plugins/qiita/Item'
 class ItemIndex extends Vue {
   item!: Item
   isLike!: Boolean
+  isStock!: Boolean
+
+  switchStock() {
+    if (this.isStock) {
+      // TODO
+    } else {
+      // TODO
+    }
+    this.isStock = !this.isStock
+  }
 
   switchLike() {
     if (this.isLike) {
