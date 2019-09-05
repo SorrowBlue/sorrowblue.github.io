@@ -20,4 +20,5 @@ jobs:
         npm run md
         npm run generate & npx gh-pages -d dist -t -branch master
       env:
+        TEST_TOKEN: ${{secrets.TEST_TOKEN}}
         CI: true
