@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches:    # Array of patterns that match refs/heads
+    - gh-pages     # Push events on master branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@master
+      with:
+        node-version: 10.x 
+    - run: git remote set-url origin https://${TEST_TOKEN}@github.com/${GITHUB_REPOSITORY}
+      env:
+        TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
+    - run: A=$(cat ${GITHUB_EVENT_PATH} | jq -r '.commits[0].author.email') && git config --global user.email "${A}"
+    - run: A=$(cat ${GITHUB_EVENT_PATH} | jq -r '.commits[0].author.name')  && git config --global user.name "${A}"
+    - run: |
+      npm install
+      npm run md
+      npm run generate
+      npx gh-pages -d dist -t -branch master
