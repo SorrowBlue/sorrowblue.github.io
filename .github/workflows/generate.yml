@@ -12,7 +12,8 @@ jobs:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@master
       with:
-        node-version: 10.x 
+        node-version: 10.x
+      - name: npm install, build, and test
       run: |
         git remote set-url origin https://${secrets.TEST_TOKEN}@github.com/${GITHUB_REPOSITORY}
         npm install
