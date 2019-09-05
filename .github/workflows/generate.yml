@@ -18,7 +18,9 @@ jobs:
         TEST_TOKEN: ${{ secrets.TEST_TOKEN }}
     - run: A=$(cat ${GITHUB_EVENT_PATH} | jq -r '.commits[0].author.email') && git config --global user.email "${A}"
     - run: A=$(cat ${GITHUB_EVENT_PATH} | jq -r '.commits[0].author.name')  && git config --global user.name "${A}"
-    - run: |
-      npm install
-      npm run md
-      npm run generate & npx gh-pages -d dist -t -branch master
+      run: |
+        npm install
+        npm run md
+        npm run generate & npx gh-pages -d dist -t -branch master
+      env:
+        CI: true
