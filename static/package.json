@@ -1,0 +1,10 @@
+{
+  "name": "sorrowblue.github.io",
+  "version": "1.0.0",
+  "description": "My wondrous Nuxt.js project",
+  "author": "SorrowBlue",
+  "private": true,
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
