@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: 15.x
 
-    - name: Generate
+    - name: Generate page
       run: yarn generate
 
     - uses: peaceiris/actions-gh-pages@v3
