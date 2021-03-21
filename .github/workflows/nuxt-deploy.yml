@@ -23,8 +23,8 @@ jobs:
 
     - run: yarn
       env:
-        QIITA_CLIENT_ID: ${{ secret.QIITA_CLIENT_ID }}
-        QIITA_CLIENT_SECRET: ${{ secret.QIITA_CLIENT_SECRET }}
+        QIITA_CLIENT_ID: ${{ secrets.QIITA_CLIENT_ID }}
+        QIITA_CLIENT_SECRET: ${{ secrets.QIITA_CLIENT_SECRET }}
 
     - name: Generate page
       run: yarn generate
