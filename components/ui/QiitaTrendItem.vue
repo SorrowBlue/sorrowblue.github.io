@@ -1,46 +1,50 @@
 <template>
-  <v-hover v-slot:default="{ hover }">
-    <v-card
-      :raised="hover"
-      :color="$vuetify.theme.dark ? (hover ? 'grey darken-3' : 'grey darken-4') : null"
-      height="100%"
-      width="344"
-      :to="`/qiichan/items/${trendItem.node.uuid}`"
-      ripple
-    >
+  <v-hover v-slot="{ hover1 }">
+    <v-card :elevation="hover1 ? 12 : 2" width="344" :to="`/qiichan/items/${trendItem.node.uuid}`" ripple>
       <v-list-item>
-        <v-list-item-avatar color="white" size="40">
+        <v-list-item-avatar color="white" size="24">
           <v-img :src="trendItem.node.author.profileImageUrl"></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title v-text="'@' + trendItem.node.author.urlName"></v-list-item-title>
+          <v-list-item-subtitle v-text="'@' + trendItem.node.author.urlName"></v-list-item-subtitle>
         </v-list-item-content>
+        <v-list-item-action>
+          <v-list-item-action-text v-text="trendItem.node.createdAt"></v-list-item-action-text>
+        </v-list-item-action>
       </v-list-item>
-
-      <v-img src="/images/qiichan/qiichan-trend_0.webp" height="194" :aspect-ratio="16 / 5">
-        <v-card-title class="body-1 white--text" v-text="trendItem.node.title"></v-card-title>
-      </v-img>
-
-      <v-card-text class="pa-0">
-        <v-row justify="space-between" class="pa-3 pt-0 pb-0">
-          <v-col class="caption" cols="auto" v-text="formatDate(trendItem.node.createdAt)"></v-col>
-          <v-col class="caption" cols="auto" v-text="`${trendItem.node.likesCount} likes`"></v-col>
-        </v-row>
-      </v-card-text>
+      <v-card-title v-text="trendItem.node.title"></v-card-title>
+      <v-spacer></v-spacer>
+      <v-card-actions>
+        <v-list-item>
+          <v-row align="center" justify="end">
+            <v-icon class="mr-1">mdi-thumb-up-outline</v-icon>
+            <span class="subheading mr-2">{{ trendItem.node.likesCount }}</span>
+            <span class="mr-1">·</span>
+            <v-icon class="mr-1"> mdi-share-variant </v-icon>
+            <span class="subheading">45</span>
+          </v-row>
+        </v-list-item>
+      </v-card-actions>
     </v-card>
   </v-hover>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from "nuxt-property-decorator"
-import { QiitaTrendItem as TrendItem } from "@/plugins/qiita/types"
+import { QiitaTrendItem as TrendItem } from '@/plugins/qiita/types'
+import { defineComponent, PropType, ref } from '@nuxtjs/composition-api'
 
-@Component
-export default class QiitaTrendItem extends Vue {
-  @Prop()
-  trendItem!: TrendItem
-
-  formatDate(date: Date) {
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-  }
-}
+export default defineComponent({
+  props: {
+    trendItem: {
+      type: Object as PropType<TrendItem>,
+      required: true,
+    },
+  },
+  setup() {
+    const hover1 = ref<boolean>(false)
+    const formatDate = (date: Date) => {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+    }
+    return { formatDate, hover1 }
+  },
+})
 </script>

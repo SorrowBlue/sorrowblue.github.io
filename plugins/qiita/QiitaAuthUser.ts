@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import QiitaUser from "@/plugins/qiita/QiitaUser"
+import QiitaUser from '@/plugins/qiita/QiitaUser'
 
 export default interface QiitaAuthUser extends QiitaUser {
   /**

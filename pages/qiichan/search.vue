@@ -10,25 +10,26 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
-import QiitaItem from "@/components/ui/QiitaItem.vue"
+import QiitaItem from '@/components/ui/QiitaItem.vue'
+import { defineComponent, ref, useAsync } from '@nuxtjs/composition-api'
+import Item from '@/plugins/qiita/Item'
+// import { QiitaApi } from '~/plugins/qiita-api.client'
 
-@Component({
-  layout: "qiichan",
+export default defineComponent({
   components: {
-    "qiita-item": QiitaItem
+    'qiita-item': QiitaItem,
   },
-  async asyncData({ app, query }) {
-    if (query.query) {
-      return {
-        items: await app.$qiitaApiClient.requestItems(1, 20, query.query as string)
-      }
-    } else {
-      return {
-        items: await app.$qiitaApiClient.requestItems(1, 20)
-      }
+  layout: 'qiichan',
+  setup(_) {
+    // const qiitaApi: QiitaApi = useContext().app.$qiitaApi
+    // const query = useRoute().value.query
+    const items = ref<Item[]>([])
+    useAsync(async () => {
+      // items.value = query.query ? await qiitaApi.requestItems(1, 20, query.query as string) : await qiitaApi.requestItems(1, 20)
+    })
+    return {
+      items,
     }
-  }
+  },
 })
-export default class Search extends Vue {}
 </script>

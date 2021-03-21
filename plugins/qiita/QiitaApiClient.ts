@@ -1,29 +1,21 @@
-import { NuxtAxiosInstance } from "@nuxtjs/axios"
-import { AxiosError, AxiosRequestConfig } from "axios"
-import { Plugin, Context } from "@nuxt/types"
-import {
-  AccessToken,
-  QiitaAuthUser,
-  QiitaTag,
-  QiitaItem,
-  QiitaLike,
-  QiitaTrendItem,
-  QiitaComment
-} from "@/plugins/qiita/types"
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { AxiosError, AxiosRequestConfig } from 'axios'
+import { Plugin, Context } from '@nuxt/types'
+import { AccessToken, QiitaAuthUser, QiitaTag, QiitaItem, QiitaLike, QiitaTrendItem, QiitaComment } from '@/plugins/qiita/types'
 
 class QiitaApiClient {
   private clientId: string
   private clientSecret: string
   private $axios: NuxtAxiosInstance
 
-  private scope = "read_qiita"
-  private static readonly TOKEN_KEY = "QIICHAN_WEB"
-  private static readonly API_ROOT = "https://qiita.com/api/v2"
+  private scope = 'read_qiita'
+  private static readonly TOKEN_KEY = 'QIICHAN_WEB'
+  private static readonly API_ROOT = 'https://qiita.com/api/v2'
 
   private _authUser!: QiitaAuthUser | null
 
   get clientState() {
-    return "BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN"
+    return 'BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN'
   }
 
   get token() {
@@ -40,11 +32,9 @@ class QiitaApiClient {
 
   constructor(axios: NuxtAxiosInstance) {
     const hostname = document.location.hostname
-    const isDebug = hostname === "localhost" || hostname === "127.0.0.1"
-    this.clientId = ""
-    this.clientSecret = isDebug
-      ? "17f0134d0c8cefe4a17ce91f4089268fa24ed9d7"
-      : "5a1e96ce9f568478eac99a602676cbe2872c33cc"
+    const isDebug = hostname === 'localhost' || hostname === '127.0.0.1'
+    this.clientId = ''
+    this.clientSecret = isDebug ? '17f0134d0c8cefe4a17ce91f4089268fa24ed9d7' : '5a1e96ce9f568478eac99a602676cbe2872c33cc'
 
     this.$axios = axios
   }
@@ -61,9 +51,7 @@ class QiitaApiClient {
   }
 
   async requestAuthUser(): Promise<QiitaAuthUser | null> {
-    return this.token != null
-      ? await this.$axios.$get("https://qiita.com/api/v2/authenticated_user", this.config)
-      : null
+    return this.token != null ? await this.$axios.$get('https://qiita.com/api/v2/authenticated_user', this.config) : null
   }
 
   async requestFollowingTags(userId: string): Promise<Array<QiitaTag>> {
@@ -90,9 +78,9 @@ class QiitaApiClient {
     await this.$axios.$delete(`https://qiita.com/api/v2/comments/${commentId}/thank`, this.config)
   }
 
-  async requestItems(page: number = 1, per_page: number = 20, query: string = ""): Promise<Array<QiitaItem>> {
+  async requestItems(page: number = 1, per_page: number = 20, query: string = ''): Promise<Array<QiitaItem>> {
     const config = this.config
-    config.params = query === "" ? { page, per_page } : { page, per_page, query }
+    config.params = query === '' ? { page, per_page } : { page, per_page, query }
     return await this.$axios.$get(`https://qiita.com/api/v2/items`, config)
   }
 
@@ -123,7 +111,7 @@ class QiitaApiClient {
         response = await this.$axios.$post(`${QiitaApiClient.API_ROOT}/access_tokens`, {
           client_id: this.clientId,
           client_secret: this.clientSecret,
-          code
+          code,
         })
       } catch (error) {
         failure(error as AxiosError)
@@ -134,16 +122,10 @@ class QiitaApiClient {
   }
 
   async trend(): Promise<Array<QiitaTrendItem>> {
-    const res: string = await this.$axios.$get("/api/")
-    const html = new DOMParser().parseFromString(res, "text/html")
-    const container = html.getElementsByClassName("p-home_container")
-    const json = container!
-      .item(0)!
-      .getElementsByClassName("p-home_main")!
-      .item(0)!
-      .getElementsByTagName("div")
-      .item(0)!
-      .getAttribute("data-hyperapp-props")
+    const res: string = await this.$axios.$get('/api/')
+    const html = new DOMParser().parseFromString(res, 'text/html')
+    const container = html.getElementsByClassName('p-home_container')
+    const json = container!.item(0)!.getElementsByClassName('p-home_main')!.item(0)!.getElementsByTagName('div').item(0)!.getAttribute('data-hyperapp-props')
     const result: QiitaTrendItem[] = []
     JSON.parse(json!).trend.edges.forEach(
       (element: {
@@ -171,9 +153,9 @@ class QiitaApiClient {
             uuid: element.node.uuid,
             author: {
               profileImageUrl: element.node.author.profileImageUrl,
-              urlName: element.node.author.urlName
-            }
-          }
+              urlName: element.node.author.urlName,
+            },
+          },
         })
       }
     )
@@ -189,26 +171,27 @@ class QiitaApiClient {
   }
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
   interface Vue {
     $qiitaApiClient: QiitaApiClient
   }
 }
 
-declare module "@nuxt/types" {
+declare module '@nuxt/types' {
   interface NuxtAppOptions {
     $qiitaApiClient: QiitaApiClient
   }
 }
 
-declare module "vuex/types/index" {
+declare module 'vuex/types/index' {
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   interface Store<S> {
     $qiitaApiClient: QiitaApiClient
   }
 }
 
 const QiitaApiClientPlugin: Plugin = (context: Context, inject) => {
-  inject("qiitaApiClient", new QiitaApiClient(context.$axios))
+  inject('qiitaApiClient', new QiitaApiClient(context.$axios))
 }
 
 export default QiitaApiClientPlugin

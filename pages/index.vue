@@ -5,8 +5,8 @@
         <v-layout grid-list-md row wrap align-start justify-start>
           <v-flex v-for="card in cards" :key="card.title" xs12 sm6 md4 lg3>
             <v-card :to="isInternal(card.link) ? card.link : ''" :href="isInternal(card.link) ? '' : card.link">
-              <v-img :src="card.src" :aspect-ratio="16 / 9">
-                <v-card-title class="align-end fill-height" v-text="card.title" />
+              <v-img :src="card.src" :aspect-ratio="16 / 9" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
+                <v-card-title class="align-end fill-height white--text" v-text="card.title" />
               </v-img>
               <v-card-text v-text="card.desc" />
             </v-card>
@@ -40,129 +40,15 @@ export default defineComponent({
         },
         {
           title: 'Portfolio',
-          src: '/images/portfolio.webp',
+          src: '/images/portfolio.svg',
           link: '/blog',
           desc: 'ポートフォリオです',
         },
         {
-          title: 'Qiita API v2 test β',
-          src: '/images/qiita.webp',
-          link: '/qiita',
+          title: 'Qiichan',
+          src: '/images/qiichan.webp',
+          link: '/qiichan',
           desc: 'Qiita API v2 個人使用試験用のテストページです。',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
-        },
-        {
-          title: 'Lorem ipsum viverra.',
-          src: 'http://placehold.jp/640x360.png',
-          link: '',
-          desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue leo in odio cursus massa nunc.',
         },
       ],
     }

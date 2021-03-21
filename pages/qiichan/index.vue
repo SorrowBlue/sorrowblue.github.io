@@ -1,37 +1,43 @@
 <template>
   <v-container>
-    <v-row justify="center" class="mr-auto">
-      <v-col v-for="trend in trends" :key="trend.node.uuid" cols="auto">
-        <qiita-trend-item :trend-item="trend"></qiita-trend-item>
+    <v-row justify="center">
+      <v-col v-for="trend in trends" :key="trend.node.uuid" align-self="stretch" cols="auto">
+        <QiitaTrendItem :trend-item="trend"></QiitaTrendItem>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
-import QiitaTrendItem from "@/components/ui/QiitaTrendItem.vue"
-import { QiitaTrendItem as TrendItem } from "@/plugins/qiita/types"
-import { qiitaStore } from "@/utils/store-accessor"
+import { QiitaTrendItem as TrendItem } from '@/plugins/qiita/types'
+import QiitaTrendItem from '@/components/ui/QiitaTrendItem.vue'
+import { defineComponent, ref, useAsync, useRoute, useRouter } from '@nuxtjs/composition-api'
+import { qiitaStore } from '@/store'
 
-@Component({
-  layout: "qiichan",
+export default defineComponent({
   components: {
-    "qiita-trend-item": QiitaTrendItem
+    QiitaTrendItem,
   },
-  async asyncData({ app, query }) {
-    const trends = await app.$qiitaApiClient.trend()
-    if (query.code) {
-      await qiitaStore.requestLoadAuthUser({ code: query.code + "", state: query.state + "" })
+  layout: 'qiichan',
+  setup() {
+    const query = useRoute().value.query
+    const trends = ref<TrendItem[]>([])
+    useAsync(async () => {
+      if (query.code && query.state) {
+        useRouter().replace({ query: {} })
+        console.log(`code: ${query.code}, state: ${query.state}`)
+        await qiitaStore.authenticate({
+          code: query.code.toString(),
+          state: query.state.toString(),
+        })
+      } else {
+        await qiitaStore.loadAuthUser()
+      }
+      trends.value = await qiitaStore.scrap.trend()
+    })
+    return {
+      trends,
     }
-    return { trends }
-  }
+  },
 })
-export default class Qiichan extends Vue {
-  restrendsult: TrendItem[] = []
-
-  mounted() {
-    this.$nuxt.$emit("SubTitle", "トレンド")
-  }
-}
 </script>

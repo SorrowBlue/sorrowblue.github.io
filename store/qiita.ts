@@ -1,7 +1,14 @@
-import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators"
-import { AxiosRequestConfig } from "axios"
-import { QiitaAuthUser } from "@/plugins/qiita/types"
-import { $axios } from "~/utils/api"
+import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators'
+import { AxiosRequestConfig } from 'axios'
+import { QiitaAuthUser } from '@/plugins/qiita/types'
+import { QiitaAccessScope, QiitaAccessToken, QiitaOAuthApi } from '~/assets/qiita-api/QiitaOAuthApi'
+import QiitaClient from '~/assets/qiita-api/QiitaClient'
+import QiitaScrap from '~/assets/qiita-api/QiitaScrap'
+import { $axios } from '~/utils/api'
+import QiitaCommentApi from '~/assets/qiita-api/QiitaCommentApi'
+import QiitaItemApi from '~/assets/qiita-api/QiitaItemApi'
+import QiitaTagApi from '~/assets/qiita-api/QiitaTagApi'
+import QiitaUserApi from '~/assets/qiita-api/QiitaUserApi'
 
 interface AccessToken {
   /**
@@ -24,89 +31,151 @@ interface AccessStateCode {
   state: string
 }
 
-const isLocal = document.location.hostname === "localhost" || document.location.hostname === "127.0.0.1"
-const scope = "read_qiita"
-const clientState = "BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN"
-const clientId = isLocal ? process.env.QIITA_CLIENT_ID_LOCAL : process.env.QIITA_CLIENT_ID
-const clientSecret = isLocal ? process.env.QIITA_CLIENT_SECRET_LOCAL : process.env.QIITA_CLIENT_SECRET
-
-@Module({ stateFactory: true, namespaced: true, name: "qiita" })
+@Module({
+  name: 'qiita',
+  stateFactory: true,
+  namespaced: true,
+})
 export default class Qiita extends VuexModule {
-  authUser: QiitaAuthUser | null = null
-  status: string = ""
+  private QIITA_API_TOKEN = 'qiita_api_token'
 
-  get authorize(): string {
-    return `https://qiita.com/api/v2/oauth/authorize?client_id=${clientId}&scope=${scope}&state=${clientState}`
+  private isLocal = document.location.hostname === 'localhost' || document.location.hostname === '127.0.0.1'
+  private clientState = 'eypVUF36dXWmsabH7jFp'
+  private clientId = this.isLocal ? process.env.QIITA_CLIENT_ID_LOCAL! : process.env.QIITA_CLIENT_ID!
+  private clientSecret = this.isLocal ? process.env.QIITA_CLIENT_SECRET_LOCAL! : process.env.QIITA_CLIENT_SECRET!
+
+  private authUser: QiitaAuthUser | null = null
+  private status: string = ''
+
+  public get client() {
+    return new QiitaClient($axios, this.clientId, this.clientSecret)
   }
 
-  @Action
-  async requestLoadAuthUser(stateCode: AccessStateCode) {
-    if (stateCode.state === clientState) {
-      let response: AccessToken | null = null
-      try {
-        response = await $axios.$post("https://qiita.com/api/v2/access_tokens", {
-          client_id: clientId,
-          client_secret: clientSecret,
-          code: stateCode.code
-        })
-      } finally {
-      }
-      if (response) {
-        localStorage.setItem("qiita_api_token", response.token)
-      } else {
-        localStorage.removeItem("qiita_api_token")
-      }
-      await this.loadAuthUser()
-    }
+  public get getAuthUser(): QiitaAuthUser | null {
+    return this.authUser
   }
 
   @Mutation
-  addUser(authUser: QiitaAuthUser | null) {
+  private setAuthUser(authUser: QiitaAuthUser | null) {
     this.authUser = authUser
   }
 
+  public get getStatus(): string {
+    return this.status
+  }
+
   @Mutation
-  addStatus(status: string) {
-    this.status = status + ""
+  public setStatus(status: string) {
+    this.status = status
   }
 
   @Action
+  public authorize() {
+    location.href = this.oauth.authorize(this.clientState, QiitaAccessScope.READ)
+  }
+
+  @Action
+  public resetStatus() {
+    this.status = ''
+  }
+
+  @Action({ rawError: true })
+  async authenticate(stateCode: AccessStateCode) {
+    this.setAuthUser(null)
+    if (stateCode.state === this.clientState) {
+      console.log(`stateCode.state is "${stateCode.state}"`)
+      let response: QiitaAccessToken | null = null
+      try {
+        response = await this.oauth.accessTokens(stateCode.code)
+        this.setStatus('認証されました')
+      } catch (e) {
+        console.log(e)
+        this.setStatus('認証できませんでした')
+      }
+      if (response !== null) {
+        localStorage.setItem(this.QIITA_API_TOKEN, response.token)
+      } else {
+        localStorage.removeItem(this.QIITA_API_TOKEN)
+      }
+    } else {
+      this.setStatus('認証されませんでした')
+    }
+    this.loadAuthUser()
+  }
+
+  @Action({ rawError: true })
   async loadAuthUser() {
-    const token = localStorage.getItem("qiita_api_token")
+    console.log(`authUser is "${this.authUser}"`)
+    if (this.authUser != null) return
+    const token = localStorage.getItem(this.QIITA_API_TOKEN)
+    console.log(`token is "${token}"`)
+    if (!token) return
+    try {
+      const request = await this.oauth.authenticatedUser()
+      if (request.status === 200) {
+        this.setAuthUser(request.data)
+      } else {
+        this.setStatus(request.statusText)
+      }
+    } catch (e) {
+      console.log(e)
+      this.setStatus('認証できませんでした')
+    }
+  }
+
+  @Action({ rawError: true })
+  logout() {
+    const token = localStorage.getItem(this.QIITA_API_TOKEN)
     if (token) {
       try {
-        const request = await $axios.get<QiitaAuthUser>("https://qiita.com/api/v2/authenticated_user", config(token))
-        if (request.status === 200) {
-          this.addUser(request.data)
-        } else {
-          this.addStatus(request.statusText)
-        }
+        $axios.$delete(`/qiita-api/access_tokens/${token}`)
+        this.setStatus('ログアウトしました')
       } catch {
-        this.addStatus("認証できませんでした")
+        this.setStatus('ログアウトできませんでした')
+      } finally {
+        this.setAuthUser(null)
+        localStorage.removeItem('qiita_api_token')
       }
     }
   }
 
   @Action
-  logout() {
-    const token = localStorage.getItem("qiita_api_token")
-    if (token) {
-      $axios.onError(() => {})
-      try {
-        $axios.$delete(`https://qiita.com/api/v2/access_tokens/${token}`)
-      } catch {
-      } finally {
-        this.addUser(null)
-        localStorage.removeItem("qiita_api_token")
-      }
+  public config(): AxiosRequestConfig {
+    const config: AxiosRequestConfig = {}
+    if (localStorage.getItem(this.QIITA_API_TOKEN)) {
+      config.headers = { Authorization: `Bearer ${localStorage.getItem(this.QIITA_API_TOKEN)}` }
     }
+    return config
   }
-}
 
-function config(token: string): AxiosRequestConfig {
-  const config: AxiosRequestConfig = {}
-  if (token) {
-    config.headers = { Authorization: `Bearer ${token}` }
+  public get oauth(): QiitaOAuthApi {
+    return new QiitaOAuthApi(this.client)
   }
-  return config
+
+  public get scrap(): QiitaScrap {
+    return new QiitaScrap(this.client)
+  }
+
+  public get comment(): QiitaCommentApi {
+    return new QiitaCommentApi(this.client)
+  }
+
+  public get item(): QiitaItemApi {
+    return new QiitaItemApi(this.client)
+  }
+
+  public get tag(): QiitaTagApi {
+    return new QiitaTagApi(this.client)
+  }
+
+  public get user(): QiitaUserApi {
+    return new QiitaUserApi(this.client)
+  }
+
+  /**
+   * token
+   */
+  public get token(): string | null {
+    return localStorage.getItem(this.QIITA_API_TOKEN)
+  }
 }

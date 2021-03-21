@@ -4,12 +4,12 @@ import Tag from '@/plugins/qiita/Tag'
 import Item from '@/plugins/qiita/Item'
 import AuthUser from '@/plugins/qiita/AuthUser'
 import AccessToken from '@/plugins/qiita/AccessToken'
-import Like from '@/plugins/qiita/Like';
-
+import Like from '@/plugins/qiita/Like'
 import { Plugin } from '@nuxt/types'
+import { QiitaTrendItem } from './qiita/types'
+import { qiitaStore } from '~/store'
 
 export class QiitaApi {
-
   private clientId: string
   private clientSecret: string
   private $axios: NuxtAxiosInstance
@@ -17,29 +17,26 @@ export class QiitaApi {
   private scope = 'read_qiita'
   private static readonly TOKEN_KEY = 'QIITA_API_V2_TOKEN'
   private _tags!: Array<Tag> | null
-  private _authUser!: AuthUser | null
-  
-  async getAuthUser() {
-    if (this._authUser == null) {
-      this._authUser = await this.requestAuthUser()
-    }
-    return this._authUser
+
+  get getAuthUser() {
+    return qiitaStore.getAuthUser
   }
 
-
   async getTags() {
-    if (this._tags == null && this._authUser != null) {
-      this._tags = await this.requestFollowingTags(this._authUser.id)
+    if (this._tags == null && this.getAuthUser != null) {
+      this._tags = await this.requestFollowingTags(this.getAuthUser.id)
     }
     return this._tags
   }
- 
-  get clientState() { return 'BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN' }
+
+  get clientState() {
+    return 'BP6TcjN-jDY2K22J9CU-iEQeeiWQ3PGN'
+  }
 
   get token() {
     return sessionStorage.getItem(QiitaApi.TOKEN_KEY)
-
   }
+
   set token(token: string | null) {
     if (token != null) {
       sessionStorage.setItem(QiitaApi.TOKEN_KEY, token)
@@ -47,6 +44,7 @@ export class QiitaApi {
       sessionStorage.removeItem(QiitaApi.TOKEN_KEY)
     }
   }
+
   constructor(axios: NuxtAxiosInstance) {
     const hostname = document.location.hostname
     const isDebug = hostname === 'localhost' || hostname === '127.0.0.1'
@@ -67,7 +65,7 @@ export class QiitaApi {
         response = await this.$axios.$post('https://qiita.com/api/v2/access_tokens', {
           client_id: this.clientId,
           client_secret: this.clientSecret,
-          code
+          code,
         })
       } catch (error) {
         failure(error as AxiosError)
@@ -88,10 +86,10 @@ export class QiitaApi {
   async requestUserArticle(userId: string): Promise<Array<any>> {
     return await this.$axios.$get(`https://qiita.com/api/v2/users/${userId}/items`, this.config)
   }
-  
+
   async requestItems(page: number = 1, per_page: number = 20, query: string = ''): Promise<Array<Item>> {
     const config = this.config
-    config.params = query == '' ?  { page, per_page } : { page, per_page, query }
+    config.params = query === '' ? { page, per_page } : { page, per_page, query }
     return await this.$axios.$get(`https://qiita.com/api/v2/items`, config)
   }
 
@@ -102,27 +100,26 @@ export class QiitaApi {
   async requestItemLikes(itemId: string): Promise<Array<Like>> {
     return await this.$axios.$get(`https://qiita.com/api/v2/items/${itemId}/likes`, this.config)
   }
+
   async requestPutLike(itemId: string) {
-    this.$axios.$put(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
+    await this.$axios.$put(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
   }
 
   async requestDeleteLike(itemId: string) {
-    this.$axios.$delete(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
+    await this.$axios.$delete(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
   }
-  
+
   async isItemLike(itemId: string): Promise<Boolean> {
-    return false
     return await this.$axios.$get(`https://qiita.com/api/v2/items/${itemId}/like`, this.config)
   }
 
-  private get config(): AxiosRequestConfig {
-    const config: AxiosRequestConfig = {}
-    if (this.token != null) {
-      config.headers = { Authorization: `Bearer ${this.token}` }
-    }
-    return config
+  async requestTagItems(tagId: string): Promise<Array<Item>> {
+    return await this.$axios.$get(`https://qiita.com/api/v2/tags/${tagId}/items`, this.config)
   }
 
+  private get config(): AxiosRequestConfig {
+    return qiitaStore.config()
+  }
 }
 
 const qiitaPlugin: Plugin = (context, inject) => {

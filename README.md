@@ -18,3 +18,8 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+```
+QIITA_CLIENT_ID_LOCAL = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+QIITA_CLIENT_SECRET_LOCAL = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+```

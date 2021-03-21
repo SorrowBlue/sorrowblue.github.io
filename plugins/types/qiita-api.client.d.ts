@@ -1,6 +1,4 @@
-import Vue from 'vue'
-import { QiitaApi } from "~/plugins/qiita-api.client"
-
+import { QiitaApi } from '~/plugins/qiita-api.client'
 
 declare module 'vue/types/vue' {
   interface Vue {

@@ -1,13 +1,13 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap justify-center>
-      <v-flex xs12>
-        <v-layout column align-center>
-          <v-flex>
-            <v-pagination v-model="page" circle :length="100" :page="page" :total-visible="6" />
-          </v-flex>
-        </v-layout>
-      </v-flex>
+      <!-- <v-flex xs12> -->
+      <!-- <v-layout column align-center> -->
+      <!-- <v-flex> -->
+      <!-- <v-pagination v-model="page" circle :length="100" :page="page" :total-visible="6" /> -->
+      <!-- </v-flex> -->
+      <!-- </v-layout> -->
+      <!-- </v-flex> -->
       <v-flex xs12 sm11>
         <v-list>
           <template v-for="(data, index) in datas">
@@ -30,31 +30,22 @@
   </v-container>
 </template>
 
-<script>
-export default {
-  watchQuery: ['page'],
-  watch: {
-    page(newPage) {
-      this.$router.push({ query: { page: newPage } })
+<script lang="ts">
+import { defineComponent, ref, useAsync, useRoute } from '@nuxtjs/composition-api'
+import QiitaItem from '~/plugins/qiita/QiitaItem'
+
+export default defineComponent({
+  layout: 'qiichan',
+  setup(_, context) {
+    const route = useRoute()
+    const datas = ref<QiitaItem[]>([])
+    useAsync(async () => {
+      datas.value = await context.root.$qiitaApi.requestTagItems(route.value.query.tag as string)
+      return {}
+    })
+    return {
+      datas,
     }
   },
-  async asyncData({ app, params, query }) {
-    const response = await app.$axios.$get('https://qiita.com/api/v2/tags', {
-      params: {
-        page: query.page,
-        sort: 'count'
-      },
-      headers: {
-        Authorization: 'Bearer c43e667cf24b8e34c4f4a0532862be2c7be765ee'
-      }
-    })
-    const page = query.page * 1 || 1
-    const pages = [1, 2, 3, 4, 5].map((v, i) => (page <= 3 ? v : page - 2 + i))
-    return {
-      pages,
-      page: query.page - 0 || 1,
-      datas: response
-    }
-  }
-}
+})
 </script>

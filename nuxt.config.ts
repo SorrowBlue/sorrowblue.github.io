@@ -1,5 +1,10 @@
+import fs from 'fs'
+import path from 'path'
 import { NuxtConfig } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
+import { QiitaApi } from './plugins/qiita-api.client'
+
+require('dotenv').config()
 
 const config: NuxtConfig = {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -19,6 +24,13 @@ const config: NuxtConfig = {
     ],
   },
 
+  server: {
+    https: {
+      key: fs.readFileSync(path.join(__dirname, './localhost+1-key.pem')),
+      cert: fs.readFileSync(path.join(__dirname, './localhost+1.pem')),
+    },
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -36,6 +48,8 @@ const config: NuxtConfig = {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://go.nuxtjs.dev/pwa
+    '@nuxtjs/pwa',
     '@nuxtjs/composition-api',
   ],
 
@@ -47,20 +61,36 @@ const config: NuxtConfig = {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@nuxtjs/proxy',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-  },
   proxy: {
-    '/api/': { target: 'https://qiita.com', pathRewrite: { '/api/': '' } },
+    '/qiita/': {
+      target: 'https://qiita.com',
+      pathRewrite: {
+        '^/qiita/': '/',
+      },
+    },
   },
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+  axios: {},
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en',
+      name: '遅れます.me',
+      title: '遅れます.me',
+      'og:title': '遅れます.me',
+      description:
+        'いつものように起きたら、突然の頭痛、そんなとき、仕事のメールを打ちたいですか？朝、いつもどおりに出発・・・しかし突然の電車遅延。混雑した社内でメール打ちたいですか？そんなあなたのためのサービスです。',
+      'og:description':
+        'いつものように起きたら、突然の頭痛、そんなとき、仕事のメールを打ちたいですか？朝、いつもどおりに出発・・・しかし突然の電車遅延。混雑した社内でメール打ちたいですか？そんなあなたのためのサービスです。',
+      lang: 'ja',
+      theme_color: '#529b58',
+      background_color: '#bde0c0',
+      display: 'standalone',
+      scope: '/',
+      start_url: '/',
     },
   },
 
@@ -92,3 +122,8 @@ const config: NuxtConfig = {
   },
 }
 export default config
+declare module 'vue/types/vue' {
+  interface Vue {
+    $qiitaApi: QiitaApi
+  }
+}

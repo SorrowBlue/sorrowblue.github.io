@@ -1,9 +1,6 @@
-export interface QiitaTrendItem {
-  followingLikers: []
-  isLikedByViewer: boolean
-  isNewArrival: boolean
-  hasCodeBlock: boolean
-  node: QiitaTrendItemNode
+export interface QiitaTrendItemAuthor {
+  profileImageUrl: string
+  urlName: string
 }
 
 export interface QiitaTrendItemNode {
@@ -14,7 +11,10 @@ export interface QiitaTrendItemNode {
   author: QiitaTrendItemAuthor
 }
 
-export interface QiitaTrendItemAuthor {
-  profileImageUrl: string
-  urlName: string
+export interface QiitaTrendItem {
+  followingLikers: []
+  isLikedByViewer: boolean
+  isNewArrival: boolean
+  hasCodeBlock: boolean
+  node: QiitaTrendItemNode
 }
