@@ -24,12 +24,12 @@ const config: NuxtConfig = {
     ],
   },
 
-  server: {
+  /*   server: {
     https: {
       key: fs.readFileSync(path.join(__dirname, './localhost+1-key.pem')),
       cert: fs.readFileSync(path.join(__dirname, './localhost+1.pem')),
     },
-  },
+  }, */
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
