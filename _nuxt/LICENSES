@@ -1,3 +1,10 @@
+/**
+  * vue-class-component v7.2.6
+  * (c) 2015-present Evan You
+  * @license MIT
+  */
+
+
 /*!
  * vue-client-only v2.0.0
  * (c) 2019-present egoist <0x142857@gmail.com>
@@ -3151,12 +3158,6 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** external {"commonjs":"vue","commonjs2":"vue","amd":"vue","root":"Vue"} ***!
   \******************************************************************************/
 
-/**
-  * vue-class-component v7.2.6
-  * (c) 2015-present Evan You
-  * @license MIT
-  */
-
 
 /*!
   * vue-router v3.5.1
@@ -3175,3 +3176,10 @@ PERFORMANCE OF THIS SOFTWARE.
  * (c) 2021 Evan You
  * @license MIT
  */
+
+
+/**
+  * vue-class-component v7.2.6
+  * (c) 2015-present Evan You
+  * @license MIT
+  */
