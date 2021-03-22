@@ -21,4 +21,11 @@ export default class QiitaCommentApi {
   public async updateComment(commentId: string, body: string): Promise<QiitaComment> {
     return await this.client.patch(`/qiita-api/v2/comments/${commentId}`, { body })
   }
+
+  /**
+   * deleteComment
+   */
+  public async deleteComment(commentId: string) {
+    await this.client.delete(`/comments/${commentId}`)
+  }
 }

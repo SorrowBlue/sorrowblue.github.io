@@ -25,11 +25,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
+import { $content } from '@nuxt/content'
+import { defineComponent, useAsync } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup() {
-    const contents = useAsync(async () => await useContext().$content('blog').sortBy('createdAt').fetch())
+    const contents = useAsync(async () => await $content('blog').sortBy('createdAt').fetch())
     return {
       contents,
     }

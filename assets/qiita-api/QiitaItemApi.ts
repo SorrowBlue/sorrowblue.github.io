@@ -29,4 +29,18 @@ export default class QiitaItemApi {
   public async postComment(itemId: string, body: string): Promise<Array<QiitaItem>> {
     return await this.client.post(`/qiita-api/v2/items/${itemId}/comments`, { body })
   }
+
+  /**
+   * items
+   */
+  public async items(page: number, perPage: number, query: string): Promise<Array<QiitaItem>> {
+    return await this.client.$get(`/items?page=${page}&per_page=${perPage}&query=${query}`)
+  }
+
+  /**
+   * item
+   */
+  public async item(itemId: string): Promise<QiitaItem> {
+    return await this.client.$get(`/items/${itemId}`)
+  }
 }

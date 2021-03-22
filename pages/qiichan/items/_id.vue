@@ -12,9 +12,7 @@
             <v-col cols="12" class="text-center caption" v-text="item.user.description"></v-col>
             <v-col cols="12" class="text-center">
               <template v-for="service in serviceLinks(item.user)">
-                <v-btn v-if="service.id" :key="service.link" icon :href="service.url" target="_blank"
-                  ><v-icon v-text="service.icon"></v-icon>
-                </v-btn>
+                <v-btn v-if="service.id" :key="service.url" icon :href="service.url" target="_blank"><v-icon v-text="service.icon"></v-icon> </v-btn>
               </template>
             </v-col>
             <v-col>
@@ -76,9 +74,9 @@
                   <v-list-item-title class="headline" v-text="comment.user.id"></v-list-item-title>
                   <v-list-item-subtitle v-text="`${comment.updated_at}に更新`"></v-list-item-subtitle>
                 </v-list-item-content>
-                <v-list-item-action v-if="comment.user.id === user.id">
+                <v-list-item-action v-if="user != null && comment.user.id === user.id">
                   <v-menu offset-y>
-                    <template v-slot:activator="{ on }">
+                    <template #activator="{ on }">
                       <v-list-item-icon>
                         <v-icon color="grey lighten-1" v-on="on">fas fa-ellipsis-v</v-icon>
                       </v-list-item-icon>
@@ -109,61 +107,64 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
-import QiitaItem from "@/components/ui/QiitaItem.vue"
-import { QiitaUser } from "@/plugins/qiita/types"
+import { QiitaUser } from '@/plugins/qiita/types'
+import { defineComponent, useAsync, useRoute } from '@nuxtjs/composition-api'
+import { qiitaStore } from '~/store'
 
-@Component({
-  layout: "qiichan",
-  components: {
-    "qiita-item": QiitaItem
-  },
-  async asyncData({ app, params }) {
-    if (params.id) {
-      const item = await app.$qiitaApiClient.requestItem(params.id)
-      const comments = await app.$qiitaApiClient.requestComments(item.id)
-      return {
-        user: await app.$qiitaApiClient.getAuthUser(),
-        item,
-        comments
-      }
-    } else {
-      return {
-        item: null
-      }
+export default defineComponent({
+  layout: 'qiichan',
+  setup() {
+    const serviceLinks = (user: QiitaUser) => {
+      return [
+        {
+          id: user.twitter_screen_name,
+          url: `https://twitter.com/${user.twitter_screen_name}`,
+          icon: 'fab fa-twitter-square',
+        },
+        {
+          id: user.linkedin_id,
+          url: `https://www.linkedin.com/in/${user.linkedin_id}`,
+          icon: 'fab fa-linkedin',
+        },
+        {
+          id: user.github_login_name,
+          url: `https://github.com/${user.github_login_name}`,
+          icon: 'fab fa-github-square',
+        },
+        {
+          id: user.facebook_id,
+          url: `https://www.facebook.com/${user.facebook_id}`,
+          icon: 'fab fa-facebook-square',
+        },
+      ]
     }
-  }
-})
-export default class QiichanItems extends Vue {
-  serviceLinks(user: QiitaUser) {
-    return [
-      {
-        id: user.twitter_screen_name,
-        url: `https://twitter.com/${user.twitter_screen_name}`,
-        icon: "fab fa-twitter-square"
-      },
-      {
-        id: user.linkedin_id,
-        url: `https://www.linkedin.com/in/${user.linkedin_id}`,
-        icon: "fab fa-linkedin"
-      },
-      {
-        id: user.github_login_name,
-        url: `https://github.com/${user.github_login_name}`,
-        icon: "fab fa-github-square"
-      },
-      {
-        id: user.facebook_id,
-        url: `https://www.facebook.com/${user.facebook_id}`,
-        icon: "fab fa-facebook-square"
+    const deleteComment = async (id: string) => {
+      await qiitaStore.comment.deleteComment(id)
+    }
+    const route = useRoute()
+    const data = useAsync(async () => {
+      if (route.value.params.id) {
+        const item = await qiitaStore.item.item(route.value.params.id)
+        const comments = await qiitaStore.item.comments(item.id)
+        return {
+          item,
+          comments,
+        }
+      } else {
+        return {
+          item: null,
+          comments: [],
+        }
       }
-    ]
-  }
-
-  async deleteComment(id: string) {
-    await this.$qiitaApiClient.deleteComment(id)
-  }
-}
+    })
+    return {
+      serviceLinks,
+      deleteComment,
+      data,
+      user: qiitaStore.getAuthUser,
+    }
+  },
+})
 </script>
 
 <style lang="scss">

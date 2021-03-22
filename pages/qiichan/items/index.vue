@@ -1,27 +1,32 @@
 <template>
   <v-container>
     <v-row justify="center" class="mr-auto">
-      <v-col v-for="item in items" :key="item.id" cols="auto">
-        <qiita-item :item="item"></qiita-item>
+      <v-col v-for="item in data.items" :key="item.id" cols="auto">
+        <QiitaItem :item="item"></QiitaItem>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from "nuxt-property-decorator"
-import QiitaItem from "@/components/ui/QiitaItem.vue"
+import QiitaItem from '@/components/ui/QiitaItem.vue'
+import { defineComponent, useAsync } from '@nuxtjs/composition-api'
+import { qiitaStore } from '~/store'
 
-@Component({
-  layout: "qiichan",
+export default defineComponent({
   components: {
-    "qiita-item": QiitaItem
+    QiitaItem,
   },
-  async asyncData({ app }) {
+  layout: 'qiichan',
+  setup() {
+    const data = useAsync(async () => {
+      return {
+        items: await qiitaStore.item.items(1, 20, ''),
+      }
+    })
     return {
-      items: await app.$qiitaApiClient.requestItems(1, 20)
+      data,
     }
-  }
+  },
 })
-export default class Search extends Vue {}
 </script>

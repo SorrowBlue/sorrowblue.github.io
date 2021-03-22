@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { QiitaTag, QiitaUser } from "@/plugins/qiita/types"
+import { QiitaTag, QiitaUser } from '@/plugins/qiita/types'
 
 export default interface QiitaItem {
   /**

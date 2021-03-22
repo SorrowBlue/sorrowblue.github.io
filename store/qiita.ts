@@ -10,22 +10,6 @@ import QiitaItemApi from '~/assets/qiita-api/QiitaItemApi'
 import QiitaTagApi from '~/assets/qiita-api/QiitaTagApi'
 import QiitaUserApi from '~/assets/qiita-api/QiitaUserApi'
 
-interface AccessToken {
-  /**
-   * 登録されたAPIクライアントを特定するためのID
-   */
-  // eslint-disable-next-line camelcase
-  client_id: string
-  /**
-   * アクセストークンに許された操作の一覧
-   */
-  scopes: Array<string>
-  /**
-   * アクセストークンを表現する文字列
-   */
-  token: string
-}
-
 interface AccessStateCode {
   code: string
   state: string
