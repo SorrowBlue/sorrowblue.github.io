@@ -1,91 +1,64 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+  <v-app>
+    <v-app-bar app fixed elevate-on-scroll>
+      <v-toolbar-title class='text-uppercase'>sorrowblue.github.io</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <template v-if='!$vuetify.breakpoint.xs'>
+        <v-toolbar-items v-for='global in globals' :key='global.title'>
+          <v-btn text :to='global.link' v-text='global.title' />
+        </v-toolbar-items>
+      </template>
+      <template v-if='$vuetify.breakpoint.xs' #extension>
+        <v-toolbar-items v-for='global in globals' :key='global.title'>
+          <v-btn text :to='global.link' v-text='global.title' />
+        </v-toolbar-items>
+      </template>
+      <v-menu offset-y :close-on-content-click='false'>
+        <template #activator='{ on }'>
+          <v-btn icon v-on='on'>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>
+              <v-switch v-model='$vuetify.theme.dark' label='Dark Mode'></v-switch>
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main>
       <v-container>
-        <nuxt />
+        <nuxt></nuxt>
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer>
+      <v-btn v-for='social in socials' :key='social.link' class='mx-4' icon :href='social.link'>
+        <v-icon size='24px'>{{ social.icon }}</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <div>&copy; 2017 - {{ new Date().getFullYear() }} SorrowBlue</div>
     </v-footer>
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
+<script lang='ts'>
+import { defineComponent } from '@nuxtjs/composition-api';
+
+export default defineComponent({
+  setup() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
+      socials: [
+        { icon: 'fab fa-twitter', link: 'https://twitter.com/sorrowblue_sb' },
+        { icon: 'fab fa-quora', link: 'https://qiita.com/SorrowBlue' }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
-    }
-  },
-}
+      globals: [
+        { title: 'Blog', link: '/blog' },
+        { title: 'Portfolio', link: '/portfolio' },
+        { title: 'Qiichan', link: '/qiichan' }
+      ]
+    };
+  }
+});
 </script>
