@@ -1,0 +1,59 @@
+{
+  "name": "遅れます.me",
+  "short_name": "sorrowblue.github.io",
+  "description": "いつものように起きたら、突然の頭痛、そんなとき、仕事のメールを打ちたいですか？朝、いつもどおりに出発・・・しかし突然の電車遅延。混雑した社内でメール打ちたいですか？そんなあなたのためのサービスです。",
+  "icons": [
+    {
+      "src": "/_nuxt/icons/icon_64x64.a33136.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_120x120.a33136.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_144x144.a33136.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_152x152.a33136.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_192x192.a33136.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_384x384.a33136.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_512x512.a33136.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#bde0c0",
+  "theme_color": "#529b58",
+  "lang": "ja",
+  "title": "遅れます.me",
+  "og:title": "遅れます.me",
+  "og:description": "いつものように起きたら、突然の頭痛、そんなとき、仕事のメールを打ちたいですか？朝、いつもどおりに出発・・・しかし突然の電車遅延。混雑した社内でメール打ちたいですか？そんなあなたのためのサービスです。",
+  "locale": "ja",
+  "scope": "/"
+}
