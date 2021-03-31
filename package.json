@@ -14,8 +14,11 @@
   "dependencies": {
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/composition-api": "^0.22.4",
     "@nuxtjs/pwa": "^3.3.5",
+    "@types/marked": "^2.0.1",
     "core-js": "^3.9.1",
+    "marked": "^2.0.1",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {
@@ -33,6 +36,7 @@
     "prettier": "^2.2.1",
     "stylelint": "^13.12.0",
     "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-standard": "^21.0.0"
+    "stylelint-config-standard": "^21.0.0",
+    "vuex-module-decorators": "^1.0.1"
   }
 }
