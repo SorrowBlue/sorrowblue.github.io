@@ -112,11 +112,14 @@ export default defineNuxtConfig({
     QIITA_CLIENT_ID: process.env.QIITA_CLIENT_ID,
     QIITA_CLIENT_SECRET: process.env.QIITA_CLIENT_SECRET,
   },
-
-  server: {
-    https: {
-      key: fs.readFileSync(path.join(__dirname, "./localhost-key.pem")),
-      cert: fs.readFileSync(path.join(__dirname, "./localhost.pem")),
-    },
-  },
+  server: ((isDev) => {
+    if (isDev) {
+      return {
+        https: {
+          key: fs.readFileSync(path.join(__dirname, "./localhost-key.pem")),
+          cert: fs.readFileSync(path.join(__dirname, "./localhost.pem")),
+        },
+      };
+    }
+  })(process.env.NODE_ENV !== "production"),
 });
