@@ -16,9 +16,9 @@ export default defineNuxtConfig({
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      { hid: "description", name: "description", content: "" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     "@/plugins/vuetify.ts",
     "@/plugins/axios-accessor.ts",
     "@/plugins/axios.ts",
-    "@/plugins/qiita.ts",
+    "@/plugins/qiita.ts"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     // https://composition-api.nuxtjs.org/
-    "@nuxtjs/composition-api",
+    "@nuxtjs/composition-api"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/pwa
     "@nuxtjs/pwa",
     // https://go.nuxtjs.dev/content
-    "@nuxt/content",
+    "@nuxt/content"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -76,8 +76,8 @@ export default defineNuxtConfig({
       background_color: "#bde0c0",
       display: "standalone",
       scope: "/",
-      start_url: "/",
-    },
+      start_url: "/"
+    }
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -92,16 +92,16 @@ export default defineNuxtConfig({
           primary: "#3d62ad",
           secondary: "#883dad",
           accent: "#883dad",
-          error: "#B00020",
+          error: "#B00020"
         },
         dark: {
           primary: "#BB86FC",
           secondary: "#03DAC6",
           accent: "#03DAC6",
-          error: "#CF6679",
-        },
-      },
-    },
+          error: "#CF6679"
+        }
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -110,16 +110,20 @@ export default defineNuxtConfig({
   // RuntimeConfig properties https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-runtime-config/
   publicRuntimeConfig: {
     QIITA_CLIENT_ID: process.env.QIITA_CLIENT_ID,
-    QIITA_CLIENT_SECRET: process.env.QIITA_CLIENT_SECRET,
+    QIITA_CLIENT_SECRET: process.env.QIITA_CLIENT_SECRET
   },
   server: ((isDev) => {
     if (isDev) {
       return {
         https: {
           key: fs.readFileSync(path.join(__dirname, "./localhost-key.pem")),
-          cert: fs.readFileSync(path.join(__dirname, "./localhost.pem")),
-        },
+          cert: fs.readFileSync(path.join(__dirname, "./localhost.pem"))
+        }
       };
     }
   })(process.env.NODE_ENV !== "production"),
+
+  render: {
+    injectScripts: false
+  }
 });
