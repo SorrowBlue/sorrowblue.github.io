@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <package-manager value="npm" />
+    <envs />
+    <method v="2">
+      <option name="LaunchBrowser.Before.Run" url="https://localhost:3000" />
+    </method>
+  </configuration>
+</component>

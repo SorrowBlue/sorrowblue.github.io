@@ -13,7 +13,7 @@
           <img :src='trendItem.node.author.profileImageUrl' alt='' />
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-subtitle>{{ trendItem.node.author.displayName }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ trendItem.node.author.urlName }}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-list-item-action-text>
