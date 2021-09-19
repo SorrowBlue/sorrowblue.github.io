@@ -1,12 +1,12 @@
 /*!
-  * vue-router v3.5.1
+  * vue-router v3.5.2
   * (c) 2021 Evan You
   * @license MIT
   */
 
 /*!
- * Vue.js v2.6.12
- * (c) 2014-2020 Evan You
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
  * Released under the MIT License.
  */
 
@@ -18,8 +18,8 @@
 
 
 /*!
- * vue-client-only v2.0.0
- * (c) 2019-present egoist <0x142857@gmail.com>
+ * vue-client-only v0.0.0-semantic-release
+ * (c) 2021-present egoist <0x142857@gmail.com>
  * Released under the MIT License.
  */
 
@@ -311,6 +311,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ../comparable */
 
 /*! ../delayable */
+
+/*! ../detachable */
 
 /*! ../framework */
 
@@ -972,6 +974,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! ./sr-Cyrl */
 
+/*! ./sr-Latn */
+
 /*! ./stack */
 
 /*! ./sv */
@@ -1007,6 +1011,8 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ./util/timestamp */
 
 /*! ./utils */
+
+/*! ./vi */
 
 /*! ./zh-Hans */
 
@@ -1222,7 +1228,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! exports provided: VWindow, VWindowItem, default */
 
-/*! exports provided: af, ar, bg, ca, ckb, cs, de, el, en, es, et, fa, fi, fr, hr, hu, he, id, it, ja, ko, lv, lt, nl, no, pl, pt, ro, ru, sk, sl, srCyrl, sv, th, tr, az, uk, zhHans, zhHant */
+/*! exports provided: af, ar, bg, ca, ckb, cs, de, el, en, es, et, fa, fi, fr, hr, hu, he, id, it, ja, ko, lv, lt, nl, no, pl, pt, ro, ru, sk, sl, srCyrl, srLatn, sv, th, tr, az, uk, vi, zhHans, zhHant */
 
 /*! exports provided: attachedRoot */
 
@@ -1282,7 +1288,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*! exports provided: parse, genStyles, genVariations, lighten, darken */
 
-/*! exports provided: parseEvent, isEventOn, isEventStart, isEventOverlapping */
+/*! exports provided: parseEvent, isEventOn, isEventHiddenOn, isEventStart, isEventOverlapping */
 
 /*! exports provided: parsedCategoryText, getParsedCategories */
 
@@ -1454,6 +1460,10 @@ PERFORMANCE OF THIS SOFTWARE.
   !*** ./src/locale/uk.ts ***!
   \**************************/
 
+/*!**************************!*\
+  !*** ./src/locale/vi.ts ***!
+  \**************************/
+
 /*!***************************!*\
   !*** ./src/locale/ckb.ts ***!
   \***************************/
@@ -1484,6 +1494,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /*!*******************************!*\
   !*** ./src/locale/sr-Cyrl.ts ***!
+  \*******************************/
+
+/*!*******************************!*\
+  !*** ./src/locale/sr-Latn.ts ***!
   \*******************************/
 
 /*!*******************************!*\
