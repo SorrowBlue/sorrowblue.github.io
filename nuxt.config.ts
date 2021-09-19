@@ -1,6 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
-import { defineNuxtConfig } from "@nuxtjs/composition-api";
+
+import { NuxtConfig } from "@nuxt/types";
+
+export const defineNuxtConfig = (config: NuxtConfig) => config
 
 export default defineNuxtConfig({
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -44,7 +47,7 @@ export default defineNuxtConfig({
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     // https://composition-api.nuxtjs.org/
-    "@nuxtjs/composition-api"
+    "@nuxtjs/composition-api/module"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
