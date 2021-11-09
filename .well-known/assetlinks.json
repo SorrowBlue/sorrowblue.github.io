@@ -10,4 +10,16 @@
       "38:94:40:37:DC:7F:39:01:D2:2D:E0:B9:CB:3C:FD:B4:38:CD:62:73:B9:F7:E6:F0:AF:13:20:90:F7:D3:AD:35"
     ]
   }
+},{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.sorrowblue.maitter.debug",
+    "sha256_cert_fingerprints":
+    [
+      "D6:C1:EA:7C:E1:B8:C5:1F:11:A4:25:30:4E:C4:77:4B:D8:6F:9D:CA:0C:A9:7F:5C:31:62:4D:2C:B2:28:F4:61",
+      "B7:89:B0:B1:7E:2A:CF:FB:99:A7:6F:ED:40:48:77:CF:61:F2:5F:DC:52:C8:B1:D4:83:5B:15:53:18:A3:0C:C5",
+      "38:94:40:37:DC:7F:39:01:D2:2D:E0:B9:CB:3C:FD:B4:38:CD:62:73:B9:F7:E6:F0:AF:13:20:90:F7:D3:AD:35"
+    ]
+  }
 }]
