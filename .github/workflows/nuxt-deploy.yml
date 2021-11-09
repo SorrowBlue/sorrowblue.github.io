@@ -28,7 +28,7 @@ jobs:
         QIITA_CLIENT_SECRET: ${{ secrets.QIITA_CLIENT_SECRET }}
 
     - name: Generate page
-      run: npm generate
+      run: npm run generate
 
     - uses: peaceiris/actions-gh-pages@v3
       with:
