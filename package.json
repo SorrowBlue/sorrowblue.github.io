@@ -19,7 +19,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@types/marked": "^3.0.1",
     "core-js": "^3.17.3",
-    "marked": "^3.0.4",
+    "marked": "^4.0.10",
     "nuxt": "^2.15.8"
   },
   "devDependencies": {
