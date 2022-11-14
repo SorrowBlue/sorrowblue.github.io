@@ -11,7 +11,11 @@ interface Sheet {
 
 interface QiitaRawTrend {
   trend: {
-    edges: QiitaTrendItem[];
+    scope: String,
+    trend: {
+      edges: QiitaTrendItem[];
+    },
+    type: String
   };
 }
 
@@ -26,7 +30,7 @@ export default class QiitaScrap extends QiitaApi {
     const raw: QiitaRawTrend = JSON.parse(
       res.values[1][2].replaceAll("\n", " ")
     );
-    return raw.trend.edges;
+    return raw.trend.trend.edges;
   }
 
   async schema(locale: string = "ja"): Promise<QiitaSchema> {
